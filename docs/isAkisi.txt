@@ -1,0 +1,17 @@
+-- Observer implemente eden sınıflar kendi constructor'ları içerisinde kendilerini publisher'lara attach() ederler.
+-- herbir observer'ın bir tane öncelik değeri olur yani çalışma sırası. Bu çalışma ısrasına göre notify ederiz. Böylece ilk önce user 'ın process göndermesini? garanti ederiz. Ondan sonra ise Çizelgeleyicinin çalışacağını vb.
+-- Observer olacaklar: User -> CheckProcessiscanBeCreated....()  OS--->CheckWaitingQueue...()  CPU --> Execute() 
+-- Çizelgeleyici --> Burada bilmiyorum ahngisi olur ama gerçek zamanlı process var mı bakacak ve ona göre process getir'i çağıracak ve dispatcher'la ilişki kuracak.
+1. Main içerisinde USer oluşturulur. USer oluşurken constructor'ı içerisinde bilgisayarfactory alır.  User'ın StartComputer() çağırılır.
+2. User kendi constructor'ında ReadText create eder ve text'ten verileri okur.
+3. StartComputer içerisinde User Bilgisayarın baslatDugmesi()'ni cagirir. Closecomputer() gerçeklenmese de olur. Process bitince cpu kapatma talimatı yollasın.
+4. Bilgisayar constructor'ında içerisindeki field'lara atama yapar. DI ile alıyor.
+5. baslatDugmesi() kendi içinde loadOperatingSystem() 'i çağırır
+6. loadOperatingSystem() kendi içerisinde OSFactory create eder ve onu çağırır. Bu basamak ilk başlarda olamayacak çünkü yeterince hazır modül olmayacak elimizde. Ama en sonlara doğru bunu yaparız.
+7. Operating system constructor'ı içerisinde Timer.start()'ı asenkron bir biçimde başlatacak. Bunu artık timer kendisi mi yapar yoksa operating system kendi mi asenkron yapar bilmiyorum bence .start denmeli timer kendi içerisinde halletsin asenkronu. Ya da operating System başlatsın Timer'ı. 
+
+
+notify checkprocesscanbecreated() if sendRequesttoOS()  OS->Requestforcreating()  prcoesmanager->processolustur() allocate()
+ram->tahsisEt()   , duruma uygun pcb oluştur , ram->pcbOlustur() , OS->sendAprropriateQueue() , Çizelgeleyici->OankiProcesskontrolet() , Çizelgeleyici->PRocessGetir() , processgetir içinde dispatcher->ContextSwitch() buradan dönen Process için Çizelgeleyici ->Çizelgele(Process)
+
+notify->execute()  ram->PCBAra() işlemlerini yap 
