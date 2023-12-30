@@ -18,8 +18,9 @@ public class CPU implements ICPU{
         this.display = display;
     }
 
-    @Override
-    public void Execute(IProcess process) {
+
+    // kendi içerisine atanmış olan proces'i çalıştıracak.
+    private void Execute() {
 
     }
 
@@ -30,7 +31,7 @@ public class CPU implements ICPU{
 
     @Override
     public void update() {
-
+        Execute();
     }
 
     @Override
