@@ -2,17 +2,23 @@ package main.java.utility.impl;
 
 import main.java.utility.abstracts.IObserver;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Publisher{
-    private static List<IObserver> gozlemciler = new LinkedList<IObserver>();
+    private static List<IObserver> observers = new LinkedList<IObserver>();
 
     public static void attach(IObserver observer) {
-        gozlemciler.add(observer);
+        observers.add(observer);
+        sortObserversByPriority();
+    }
+
+    private static void sortObserversByPriority() {
+        observers.sort(Comparator.comparingInt(IObserver::getSequenceNumber));
     }
 
     public static void ourNotify() {
-        gozlemciler.forEach(x->x.update());
+        observers.forEach(x->x.update());
     }
 }

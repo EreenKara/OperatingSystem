@@ -30,7 +30,7 @@ public class User implements IUser{
     }
 
     @Override
-    public int getSira() {
+    public int getSequenceNumber() {
         return 0;
     }
 }

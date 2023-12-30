@@ -4,25 +4,25 @@ import main.java.os.abstracts.IProcess;
 
 public class Process implements IProcess {
 
-    private String processName;
+    private String[] processProperties;
     private int processId;
     private int priority;
 
     public Process() {
     }
 
-    public Process(String processName, int processId, int priority) {
-        this.processName = processName;
+    public Process(String[] processProperties, int processId, int priority) {
+        this.processProperties = processProperties;
         this.processId = processId;
         this.priority = priority;
     }
 
-    public String getProcessName() {
-        return processName;
+    public String[] getProcessProperties() {
+        return processProperties;
     }
 
-    public void setProcessName(String processName) {
-        this.processName = processName;
+    public void setProcessProperties(String[] processProperties) {
+        this.processProperties = processProperties;
     }
 
     public int getProcessId() {

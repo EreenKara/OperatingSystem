@@ -14,6 +14,24 @@ public class PCB implements IPCB {
     private int workingTime;
     private String processColor;
     private List<IIODevice> ioDevices;
+    private int estimatedWorkingTime;
+    private int arrivingTime;
+
+    public int getEstimatedWorkingTime() {
+        return estimatedWorkingTime;
+    }
+
+    public void setEstimatedWorkingTime(int estimatedWorkingTime) {
+        this.estimatedWorkingTime = estimatedWorkingTime;
+    }
+
+    public int getArrivingTime() {
+        return arrivingTime;
+    }
+
+    public void setArrivingTime(int arrivingTime) {
+        this.arrivingTime = arrivingTime;
+    }
 
     private Map<Integer,Integer> memoryOccupiedPageTable;
 

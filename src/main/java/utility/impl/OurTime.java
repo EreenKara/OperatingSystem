@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class OurTime implements IOurTime {
-    private long elapsedTime;
+    public static long elapsedTime;
     private final ScheduledExecutorService executorService;
     private final long timeRate;
 
@@ -19,7 +19,10 @@ public class OurTime implements IOurTime {
 
     @Override
     public void start() {
-        executorService.scheduleAtFixedRate(() -> elapsedTime += 1, 5, timeRate, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(() ->{
+            elapsedTime += 1;
+            Publisher.ourNotify();
+            }, timeRate, timeRate, TimeUnit.SECONDS);
     }
 
     @Override
