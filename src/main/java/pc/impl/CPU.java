@@ -36,6 +36,6 @@ public class CPU implements ICPU{
 
     @Override
     public int getSequenceNumber() {
-        return 0;
+        return 2;
     }
 }

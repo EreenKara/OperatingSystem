@@ -21,6 +21,6 @@ public class SchedulerOS implements ISchedulerOS {
 
     @Override
     public int getSequenceNumber() {
-        return 0;
+        return 1;
     }
 }
