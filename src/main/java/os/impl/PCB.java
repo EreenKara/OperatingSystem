@@ -4,6 +4,7 @@ import main.java.iodevices.abstracts.IIODevice;
 import main.java.os.abstracts.IPCB;
 import main.java.utility.enums.State;
 
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class PCB implements IPCB {
     private List<IIODevice> ioDevices;
     private int estimatedWorkingTime;
     private int arrivingTime;
+    private Dictionary<Integer, Integer> memoryOccupiedPageTable;
 
     public int getEstimatedWorkingTime() {
         return estimatedWorkingTime;
@@ -34,9 +36,12 @@ public class PCB implements IPCB {
         this.arrivingTime = arrivingTime;
     }
 
-    private Map<Integer, Integer> memoryOccupiedPageTable;
 
-    public PCB(int processId, State state, int programCounter, int workingTime, String processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable) {
+
+    public PCB(int processId, State state, int programCounter,
+    		int workingTime, String processColor, List<IIODevice> ioDevices,
+    		Dictionary<Integer, Integer> memoryOccupiedPageTable)
+    {
         this.processId = processId;
         this.state = state;
         this.programCounter = programCounter;
