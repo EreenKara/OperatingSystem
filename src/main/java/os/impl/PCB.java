@@ -12,10 +12,11 @@ public class PCB implements IPCB {
     private State state;
     private int programCounter;
     private int workingTime;
+    private int estimatedTime;
     private String processColor;
     private List<IIODevice> ioDevices;
 
-    private Map<Integer,Integer> memoryOccupiedPageTable;
+    private Map<Integer, Integer> memoryOccupiedPageTable;
 
     public PCB(int processId, State state, int programCounter, int workingTime, String processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable) {
         this.processId = processId;
@@ -57,6 +58,14 @@ public class PCB implements IPCB {
 
     public void setWorkingTime(int workingTime) {
         this.workingTime = workingTime;
+    }
+
+    public int getEstimatedTime() {
+        return estimatedTime;
+    }
+
+    public void setEstimatedTime(int estimatedTime) {
+        this.estimatedTime = estimatedTime;
     }
 
     public String getProcessColor() {

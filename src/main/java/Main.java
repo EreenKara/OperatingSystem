@@ -7,10 +7,11 @@ public class Main {
     public static void main(String[] args) {
 
         // Generate random color
+        while(true){
         String randomColor = generateRandomColor();
-
         // Use ANSI escape codes to set the font color in the console
-        System.out.println("\033[38;5;" + randomColor + "mHello, Random Colored Text!\033[0m");
+        String test="\033[38;5;" + randomColor + "mHello, Random Colored Text!\033[0m";
+        System.out.println(test);}
 
     }
     private static String generateRandomColor() {

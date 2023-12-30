@@ -23,6 +23,9 @@ public interface IPCB {
 
     public void setWorkingTime(int workingTime);
 
+    int getEstimatedTime();
+
+    void setEstimatedTime(int estimatedTime);
     public String getProcessColor();
 
     public void setProcessColor(String processColor);
