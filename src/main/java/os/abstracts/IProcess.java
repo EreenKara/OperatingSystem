@@ -1,9 +1,11 @@
 package main.java.os.abstracts;
 
-public interface IProcess {
-    public String[] getProcessProperties() ;
+import main.java.utility.enums.State;
 
-    public void setProcessProperties(String[] processProperties);
+public interface IProcess {
+    String[] getProcessProperties() ;
+
+    void setProcessProperties(String[] processProperties);
     int getProcessId();
 
     void setProcessId(int processId);

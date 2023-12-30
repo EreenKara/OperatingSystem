@@ -3,13 +3,14 @@ package main.java.os.impl;
 import main.java.os.abstracts.IProcess;
 import main.java.os.abstracts.IRealTimeQueue;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class RealTimeQueue implements IRealTimeQueue {
     private final Queue<IProcess> priority0;
 
-    public RealTimeQueue(Queue<IProcess> realtimeQueue) {
-        this.priority0 = realtimeQueue;
+    public RealTimeQueue() {
+        this.priority0 = new LinkedList<>();
     }
     @Override
     public void add(IProcess process) {
@@ -18,6 +19,6 @@ public class RealTimeQueue implements IRealTimeQueue {
 
     @Override
     public IProcess get() {
-        return priority0.poll();
+        return priority0.remove();
     }
 }
