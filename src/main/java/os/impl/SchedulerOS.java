@@ -55,7 +55,7 @@ public class SchedulerOS implements ISchedulerOS {
 
     @Override
     public int getSequenceNumber() {
-        return 1;
+        return 0;
     }
 
     private void updatePriorityAndState(IProcess process) {
