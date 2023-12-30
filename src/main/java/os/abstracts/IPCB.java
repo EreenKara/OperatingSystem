@@ -34,5 +34,12 @@ public interface IPCB {
     public Map<Integer, Integer> getMemoryOccupiedPageTable();
 
     public void setMemoryOccupiedPageTable(Map<Integer, Integer> memoryOccupiedPageTable) ;
+    public int getEstimatedWorkingTime() ;
+
+    public void setEstimatedWorkingTime(int estimatedWorkingTime) ;
+
+    public int getArrivingTime();
+
+    public void setArrivingTime(int arrivingTime) ;
 
 }

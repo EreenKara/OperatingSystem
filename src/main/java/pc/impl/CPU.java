@@ -35,7 +35,7 @@ public class CPU implements ICPU{
     }
 
     @Override
-    public int getSira() {
+    public int getSequenceNumber() {
         return 0;
     }
 }

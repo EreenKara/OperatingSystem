@@ -20,7 +20,7 @@ public class SchedulerOS implements ISchedulerOS {
     }
 
     @Override
-    public int getSira() {
+    public int getSequenceNumber() {
         return 0;
     }
 }
