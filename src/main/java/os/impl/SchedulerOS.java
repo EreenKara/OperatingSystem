@@ -1,6 +1,7 @@
 package main.java.os.impl;
 
 import main.java.os.abstracts.*;
+import main.java.utility.enums.State;
 
 public class SchedulerOS implements ISchedulerOS {
 
@@ -28,7 +29,7 @@ public class SchedulerOS implements ISchedulerOS {
             prevExecutedProcess = dispatcher.ContextSwitch(process);
         } else if ((process = schedulerRR.getProcess()) != null) {
             prevExecutedProcess = dispatcher.ContextSwitch(process);
-            updatePriority(prevExecutedProcess);
+            updatePriorityAndState(prevExecutedProcess);
             schedulerRR.scheduleProcess(prevExecutedProcess);
             return process;
         }
@@ -57,7 +58,8 @@ public class SchedulerOS implements ISchedulerOS {
         return 1;
     }
 
-    private void updatePriority(IProcess process) {
+    private void updatePriorityAndState(IProcess process) {
+        if(process==null)return;
         int processPriority = process.getPriority();
         if (processPriority == 3) {
             return;

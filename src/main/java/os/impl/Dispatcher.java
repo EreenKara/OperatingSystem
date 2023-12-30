@@ -10,7 +10,6 @@ import main.java.utility.enums.State;
 public class Dispatcher implements IDispatcher {
 
     private ICPU cpu;
-    private IRAM ram;
 
     @Override
     public IProcess ContextSwitch(IProcess newProcess) {
@@ -20,10 +19,10 @@ public class Dispatcher implements IDispatcher {
     }
 
     private void uploadProcess(IProcess process){
-        IPCB pcb=ram.search(process.getProcessId());
-        if(pcb==null){
-            return;
-        }
+//        IPCB pcb=ram.search(process.getProcessId());
+//        if(pcb==null){
+//            return;
+//        }
 //        ram.allocate();
         cpu.setProcess(process);
     }

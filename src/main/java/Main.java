@@ -1,11 +1,21 @@
 package main.java;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        Queue<Integer> tet= new LinkedList<>();
+        tet.add(1);
+        tet.add(2);
+        Iterator<Integer> iterator = tet.iterator();
+        while (iterator.hasNext()) {
+            Integer element = iterator.next();
+            System.out.println(element);
+        }
         // Generate random color
         while(true){
         String randomColor = generateRandomColor();

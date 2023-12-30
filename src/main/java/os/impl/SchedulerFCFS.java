@@ -12,6 +12,10 @@ public class SchedulerFCFS implements ISchedulerFCFS {
         this.realTimeQueue = new RealTimeQueue();
     }
 
+    public SchedulerFCFS(IRealTimeQueue realTimeQueue) {
+        this.realTimeQueue = realTimeQueue;
+    }
+
     @Override
     public IProcess getProcess() {
         return realTimeQueue.get();

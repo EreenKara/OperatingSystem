@@ -1,5 +1,5 @@
 package main.java.utility.enums;
 
 public enum State {
-    CREATED,RUNNING,WAITING,TERMINATED
+    CREATED,READY,RUNNING,WAITING,TERMINATED
 }

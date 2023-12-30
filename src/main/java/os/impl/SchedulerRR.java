@@ -10,6 +10,10 @@ public class SchedulerRR implements ISchedulerRR {
         this.userQueue = new UserQueue();
     }
 
+    public SchedulerRR(UserQueue userQueue) {
+        this.userQueue = userQueue;
+    }
+
     @Override
     public IProcess getProcess() {
         return userQueue.get();
@@ -17,6 +21,7 @@ public class SchedulerRR implements ISchedulerRR {
 
     @Override
     public void scheduleProcess(IProcess process) {
+        if(process!=null)
             userQueue.add(process);
     }
 }

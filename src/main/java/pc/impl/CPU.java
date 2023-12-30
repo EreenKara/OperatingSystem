@@ -38,6 +38,7 @@ public class CPU implements ICPU {
         if(pcb.getWorkingTime()==pcb.getEstimatedTime())
         {
             pcb.setState(State.TERMINATED);
+            return;
         }
 //        display.
         pcb.setWorkingTime(pcb.getWorkingTime()+1);

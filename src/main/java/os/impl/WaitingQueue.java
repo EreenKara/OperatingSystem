@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class WaitingQueue implements IWaitingQueue {
-    private Queue<IProcess> waitingQueue;
+    private final Queue<IProcess> waitingQueue;
 
     public WaitingQueue() {
         this.waitingQueue = new LinkedList<>();
@@ -22,5 +22,10 @@ public class WaitingQueue implements IWaitingQueue {
     @Override
     public IProcess dequeue() {
         return waitingQueue.remove();
+    }
+
+    @Override
+    public Queue<IProcess> getQueue() {
+        return waitingQueue;
     }
 }

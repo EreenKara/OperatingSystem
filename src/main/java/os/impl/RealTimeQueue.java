@@ -12,6 +12,11 @@ public class RealTimeQueue implements IRealTimeQueue {
     public RealTimeQueue() {
         this.priority0 = new LinkedList<>();
     }
+
+    public RealTimeQueue(Queue<IProcess> priority0) {
+        this.priority0 = priority0;
+    }
+
     @Override
     public void add(IProcess process) {
         priority0.add(process);
