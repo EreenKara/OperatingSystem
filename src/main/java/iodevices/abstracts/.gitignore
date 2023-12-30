@@ -1,5 +1,5 @@
-/ICDSurucusu.class
+/ICDDrive.class
 /IIODevice.class
 /IModem.class
-/ITarayici.class
-/IYazici.class
+/IScanner.class
+/IPrinter.class

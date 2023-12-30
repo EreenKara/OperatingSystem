@@ -1,19 +1,20 @@
 package main.java.iodevices.impl;
 
-import main.java.iodevices.abstracts.ITarayici;
+import main.java.iodevices.abstracts.IPrinter;
 import main.java.os.abstracts.IProcess;
 
-public class Tarayici implements ITarayici {
-    private boolean _availableProcess = true;
+public class Printer implements IPrinter {
     private int _currentProcessId = -1;
-    private int tarayiciId;
+    private boolean _availableProcess = true;
+    private int printerId;
 
-    public Tarayici(int tarayiciId) {
-        this.tarayiciId = tarayiciId;
+    public Printer(int printerId)
+    {
+        this.printerId = printerId;
     }
 
     @Override
-    public boolean checkStatus() {
+    public boolean checkStatus() {  //
         return _availableProcess;
     }
 
@@ -27,6 +28,7 @@ public class Tarayici implements ITarayici {
         }
         return false;
     }
+
     @Override
     public int checkWhichProcessUsingTheDevice() {
         return _currentProcessId;

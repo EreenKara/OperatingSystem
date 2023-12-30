@@ -1,20 +1,19 @@
 package main.java.iodevices.impl;
 
-import main.java.iodevices.abstracts.IYazici;
+import main.java.iodevices.abstracts.ICDDrive;
 import main.java.os.abstracts.IProcess;
-import main.java.os.impl.ProcessManager;
 
-public class Yazici implements IYazici {
-    private int _currentProcessId = -1;
+public class CDDrive implements ICDDrive {
     private boolean _availableProcess = true;
-    private int yaziciId;
+    private int _currentProcessId = -1;
+    private int cdDriveId;
 
-    public Yazici(int yaziciId) {
-        this.yaziciId = yaziciId;
+    public CDDrive(int cdDriveId) {
+        this.cdDriveId = cdDriveId;
     }
 
     @Override
-    public boolean checkStatus() {  //
+    public boolean checkStatus() {
         return _availableProcess;
     }
 

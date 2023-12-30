@@ -1,15 +1,15 @@
 package main.java.iodevices.impl;
 
-import main.java.iodevices.abstracts.ICDSurucusu;
+import main.java.iodevices.abstracts.IScanner;
 import main.java.os.abstracts.IProcess;
 
-public class CDSurucusu implements ICDSurucusu {
+public class Scanner implements IScanner {
     private boolean _availableProcess = true;
     private int _currentProcessId = -1;
-    private int cdSurucusuId;
+    private int scannerId;
 
-    public CDSurucusu(int cdSurucusuId) {
-        this.cdSurucusuId = cdSurucusuId;
+    public Scanner(int scannerId) {
+        this.scannerId = scannerId;
     }
 
     @Override
@@ -27,10 +27,8 @@ public class CDSurucusu implements ICDSurucusu {
         }
         return false;
     }
-
     @Override
     public int checkWhichProcessUsingTheDevice() {
         return _currentProcessId;
-
     }
 }
