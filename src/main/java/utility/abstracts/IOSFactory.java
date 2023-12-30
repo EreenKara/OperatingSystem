@@ -4,6 +4,6 @@ import main.java.os.abstracts.IOS;
 
 public interface IOSFactory {
 
-    public IOS factoryMethod();
+    IOS factoryMethod();
 
 }

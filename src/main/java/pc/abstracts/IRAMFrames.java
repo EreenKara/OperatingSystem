@@ -1,7 +1,7 @@
 package main.java.pc.abstracts;
 
 public interface IRAMFrames {
-    public void truncateFrame();
-    public void allocateFrame(int count);
+    void truncateFrame();
+    void allocateFrame(int count);
 
 }
