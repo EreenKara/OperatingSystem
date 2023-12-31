@@ -69,9 +69,7 @@ public class OS implements IOS {
         this.waitingQueue = waitingQueue;
         Publisher.attach(this);
     }
-    private void truncateRam(){
-        realTimeQueue
-    }
+
 
     @Override
     public void update() {
@@ -80,7 +78,7 @@ public class OS implements IOS {
 
     @Override
     public int getSequenceNumber() {
-        return 3;
+        return 4;
     }
 
     @Override

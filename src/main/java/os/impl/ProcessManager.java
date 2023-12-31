@@ -18,6 +18,7 @@ import main.java.pc.impl.Ram;
 import main.java.pc.impl.Status;
 import main.java.utility.abstracts.IObserver;
 import main.java.utility.enums.State;
+import main.java.utility.impl.Publisher;
 
 public class ProcessManager implements IProcessManager, IObserver {
 
@@ -35,6 +36,7 @@ public class ProcessManager implements IProcessManager, IObserver {
         this.scanners=scanners;
         this.modems=modems;
         this.cdDrives=cdDrives;
+		Publisher.attach(this);
     }
     private String generateColor() {
         int colorCode = pid;

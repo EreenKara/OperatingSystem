@@ -95,6 +95,6 @@ public class CPU implements ICPU {
 
     @Override
     public int getSequenceNumber() {
-        return 2;
+        return 3;
     }
 }

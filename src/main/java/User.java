@@ -40,7 +40,7 @@ public class User implements IUser {
 
     @Override
     public int getSequenceNumber() {
-        return 0;
+        return 1;
     }
 
     private void checkProcess() {
