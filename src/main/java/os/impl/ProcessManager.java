@@ -166,7 +166,12 @@ public class ProcessManager implements IProcessManager, IObserver {
 
     @Override
     public IProcess allocateDevicesAndRam(IProcess process) {
-		if(checkDevices(process.getProcessProperties())&& ram.checkStatus(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED) {
+		if(process.getPriority()==0 && ram.checkStatusForRealTimeProcesses(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED){
+			IPCB pcb = ram.search(process.getProcessId());
+			pcb.setState(State.READY);
+			pcb.setMemoryOccupiedPageTable(ram.allocateForRealTimeProcesses(Integer.parseInt(process.getProcessProperties()[3])));
+		}
+		else if(checkDevices(process.getProcessProperties())&& ram.checkStatus(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED) {
 			IPCB pcb = ram.search(process.getProcessId());
 
 			pcb.setState(State.READY);
