@@ -36,7 +36,7 @@ public class ProcessManager implements IProcessManager {
         this.cdDrives=cdDrives;
     }
     private String generateColor() {
-        int colorCode = pid;
+        int colorCode = new Random().nextInt()%256;
         return Integer.toString(colorCode);
     }
     @Override //oluşturmak için

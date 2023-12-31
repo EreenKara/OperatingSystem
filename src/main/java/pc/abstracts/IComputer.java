@@ -7,6 +7,7 @@ public interface IComputer {
     void turnOn();
     void turnOff();
     IOS getOS();
+    boolean getIsOn();
     boolean loadOperatingSystem();
 
 

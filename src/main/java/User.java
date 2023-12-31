@@ -5,6 +5,7 @@ import main.java.pc.impl.Computer;
 import main.java.utility.abstracts.IReadText;
 import main.java.utility.impl.OurTime;
 import main.java.utility.impl.Publisher;
+import main.java.utility.impl.ReadText;
 
 import java.util.List;
 
@@ -14,14 +15,17 @@ public class User implements IUser {
 
     private final IComputer computer;
 
-    public User(IReadText readText) {
-        this.readText = readText;
-        this.computer = new Computer();
+    public User(IComputer computer) {
+        this.readText = new ReadText();
+        readText.read("C:\\Users\\ilyas\\School\\Isletim Sistemleri\\Odev\\giris.txt");
+        this.computer = computer;
+        Publisher.attach(this);
     }
 
     @Override
     public void startComputer() {
         computer.turnOn();
+        computer.loadOperatingSystem();
     }
 
     @Override
@@ -36,7 +40,7 @@ public class User implements IUser {
 
     @Override
     public int getSequenceNumber() {
-        return 1;
+        return 0;
     }
 
     private void checkProcess() {
@@ -45,7 +49,7 @@ public class User implements IUser {
     }
 
     private List<String[]> getProcessListByArrivalTime(List<String[]> processList) {
-        return (List<String[]>) processList.stream().filter(process -> process[0] == Long.toString(OurTime.elapsedTime));
+        return processList.stream().filter(process -> process[0].equals(Long.toString(OurTime.elapsedTime))).toList();
     }
 
     private void sendRequestToOS(String[] process) {

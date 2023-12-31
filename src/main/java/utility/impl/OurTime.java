@@ -15,13 +15,15 @@ public class OurTime implements IOurTime {
         this.timeRate = timeRate;
         this.elapsedTime = 0;
         this.executorService = Executors.newSingleThreadScheduledExecutor();
+        start();
     }
 
     @Override
     public void start() {
         executorService.scheduleAtFixedRate(() ->{
-            elapsedTime += 1;
             Publisher.ourNotify();
+            elapsedTime += 1;
+
             }, timeRate, timeRate, TimeUnit.SECONDS);
     }
 

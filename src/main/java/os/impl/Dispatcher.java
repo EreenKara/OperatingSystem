@@ -5,11 +5,16 @@ import main.java.os.abstracts.IPCB;
 import main.java.os.abstracts.IProcess;
 import main.java.pc.abstracts.ICPU;
 import main.java.pc.abstracts.IRAM;
+import main.java.pc.impl.CPU;
 import main.java.utility.enums.State;
 
 public class Dispatcher implements IDispatcher {
 
-    private ICPU cpu;
+    private final ICPU cpu;
+
+    public Dispatcher(ICPU cpu) {
+        this.cpu = cpu;
+    }
 
     @Override
     public IProcess ContextSwitch(IProcess newProcess) {
@@ -19,11 +24,6 @@ public class Dispatcher implements IDispatcher {
     }
 
     private void uploadProcess(IProcess process){
-//        IPCB pcb=ram.search(process.getProcessId());
-//        if(pcb==null){
-//            return;
-//        }
-//        ram.allocate();
         cpu.setProcess(process);
     }
 

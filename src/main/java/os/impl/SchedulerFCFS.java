@@ -7,15 +7,9 @@ import main.java.os.abstracts.ISchedulerFCFS;
 public class SchedulerFCFS implements ISchedulerFCFS {
 
     private final IRealTimeQueue realTimeQueue;
-
-    public SchedulerFCFS() {
-        this.realTimeQueue = new RealTimeQueue();
-    }
-
     public SchedulerFCFS(IRealTimeQueue realTimeQueue) {
         this.realTimeQueue = realTimeQueue;
     }
-
     @Override
     public IProcess getProcess() {
         return realTimeQueue.get();

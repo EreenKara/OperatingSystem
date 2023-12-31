@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Publisher{
-    private static List<IObserver> observers = new LinkedList<IObserver>();
+    private final static List<IObserver> observers = new LinkedList<>();
 
     public static void attach(IObserver observer) {
         observers.add(observer);
@@ -19,6 +19,6 @@ public class Publisher{
     }
 
     public static void ourNotify() {
-        observers.forEach(x->x.update());
+        observers.forEach(IObserver::update);
     }
 }

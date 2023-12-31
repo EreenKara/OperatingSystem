@@ -2,6 +2,7 @@ package main.java.os.impl;
 
 import main.java.os.abstracts.*;
 import main.java.utility.enums.State;
+import main.java.utility.impl.Publisher;
 
 public class SchedulerOS implements ISchedulerOS {
 
@@ -9,16 +10,11 @@ public class SchedulerOS implements ISchedulerOS {
     private final ISchedulerFCFS schedulerFCFS;
     private final IDispatcher dispatcher;
 
-    public SchedulerOS() {
-        schedulerRR = new SchedulerRR();
-        schedulerFCFS = new SchedulerFCFS();
-        dispatcher = new Dispatcher();
-    }
-
     public SchedulerOS(ISchedulerRR schedulerRR, ISchedulerFCFS schedulerFCFS, IDispatcher dispatcher) {
-        this.schedulerRR = new SchedulerRR();
-        this.schedulerFCFS = new SchedulerFCFS();
-        this.dispatcher = new Dispatcher();
+        this.schedulerRR = schedulerRR;
+        this.schedulerFCFS = schedulerFCFS;
+        this.dispatcher = dispatcher;
+        Publisher.attach(this);
     }
 
     @Override
@@ -32,6 +28,9 @@ public class SchedulerOS implements ISchedulerOS {
             updatePriorityAndState(prevExecutedProcess);
             schedulerRR.scheduleProcess(prevExecutedProcess);
             return process;
+        }
+        else{
+            dispatcher.ContextSwitch(null);
         }
         return null;
 
@@ -55,7 +54,7 @@ public class SchedulerOS implements ISchedulerOS {
 
     @Override
     public int getSequenceNumber() {
-        return 0;
+        return 1;
     }
 
     private void updatePriorityAndState(IProcess process) {

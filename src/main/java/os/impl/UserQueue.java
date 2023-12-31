@@ -17,12 +17,6 @@ public class UserQueue implements IUserQueue {
         this.priority3 = new LinkedList<>();
     }
 
-    public UserQueue(Queue<IProcess> priority1, Queue<IProcess> priority2, Queue<IProcess> priority3) {
-        this.priority1 = priority1;
-        this.priority2 = priority2;
-        this.priority3 = priority3;
-    }
-
     @Override
     public void add(IProcess process) {
         switch (process.getPriority()) {

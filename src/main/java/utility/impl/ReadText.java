@@ -19,11 +19,12 @@ public class ReadText implements IReadText {
             {
                 String[] numbers=line.split(", ");
                 data.add(numbers);
-                for(String number:numbers)
-                {
-                    System.out.print(number+" ");
-                }
-                System.out.println();
+                //TODO Delete
+//                for(String number:numbers)
+//                {
+//                    System.out.print(number+" ");
+//                }
+//                System.out.println();
             }
         }catch(IOException e)
         {

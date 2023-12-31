@@ -8,32 +8,34 @@ import main.java.pc.abstracts.IRAM;
 import main.java.pc.abstracts.IRAMFrames;
 
 public class Ram implements IRAM {
-	   private int TotalRam;
+	   private int totalRam;
 	   public int ramFrameSize;
-	   private IRAMFrames[] RamFrames;
+	   private IRAMFrames[] ramFrames;
        private Dictionary<Integer, IPCB> allocated ;
        
 	public Ram(int totalRam) {
 		this.ramFrameSize=8;
-		this.TotalRam=totalRam;
-		for(int i = 0 ; i<totalRam/ramFrameSize;i++)
+		this.totalRam =totalRam;
+		int size=totalRam/ramFrameSize;
+		ramFrames= new RamFrames[size];
+		for(int i = 0 ; i<size;i++)
 		{
-			RamFrames[i]=new RamFrames(ramFrameSize);
+			ramFrames[i]=new RamFrames(ramFrameSize);
 		}
-		allocated= new Hashtable<Integer, IPCB>();
+		allocated= new Hashtable<>();
 	}
 	
 	   private IPCB getPCBByID(int processID) {
 	        return allocated.get(processID);
 	    }
 	   public Status checkStatus(int memorysize) {
-			if(memorysize>TotalRam||memorysize<0) {
+			if(memorysize> totalRam ||memorysize<0) {
 				return Status.DELETED;		   
 			}
 			int frameMiktari=(int)(Math.ceil(memorysize/8));
 			int count =0;
-			for(int i = 0;i<TotalRam/ramFrameSize;i++) {
-				if(!(RamFrames[i].checkAllocated())) count++;
+			for(int i = 0; i< totalRam /ramFrameSize; i++) {
+				if(!(ramFrames[i].checkAllocated())) count++;
 				if(count==frameMiktari) return Status.ALLOCATED;;
 			}
 			return Status.WAITED;
@@ -42,11 +44,11 @@ public class Ram implements IRAM {
 		   int frameMiktari=(int)(Math.ceil(memorysize/8));
 		   Dictionary<Integer,Integer> pageTable= new Hashtable<Integer, Integer>();
 		   int count =0;
-		   for(int i = 0;i<TotalRam/ramFrameSize;i++) {
-				if(!(RamFrames[i].checkAllocated())) {
+		   for(int i = 0; i< totalRam /ramFrameSize; i++) {
+				if(!(ramFrames[i].checkAllocated())) {
 					pageTable.put(count, i);
 					count++;
-					RamFrames[i].allocateFrame(8);
+					ramFrames[i].allocateFrame(8);
 					if(count == frameMiktari) break;
 				}
 			
@@ -114,19 +116,19 @@ public class Ram implements IRAM {
 	}
     // sonradan
  	public int getTotalRam() {
-	return  TotalRam;
+	return totalRam;
 	}
 	public void setTotalRam(int TotalRam) 
 	{
-		this.TotalRam=TotalRam;
+		this.totalRam =TotalRam;
 	}
 	
 	public IRAMFrames[] getRamFrames() {
-	return  RamFrames;
+	return ramFrames;
 	}
 	public void setRamFrames(IRAMFrames[] RamFrames)
 	{
-		this.RamFrames=RamFrames;
+		this.ramFrames =RamFrames;
 	}
 	@Override
 	public boolean addPCB(IPCB pcb) {

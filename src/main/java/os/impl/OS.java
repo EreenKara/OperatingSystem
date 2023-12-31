@@ -10,6 +10,7 @@ import main.java.pc.abstracts.IDisplay;
 import main.java.pc.abstracts.IRAM;
 import main.java.utility.abstracts.IOurTime;
 import main.java.utility.enums.State;
+import main.java.utility.impl.Publisher;
 
 import java.util.List;
 
@@ -17,23 +18,57 @@ public class OS implements IOS {
     /*
      *
      * */
-    private IDisplay display;
-    private IRAM ram;
-    private ICPU cpu;
-    private IRealTimeQueue realTimeQueue;
-    private IUserQueue userQueue;
-    private ISchedulerRR schedulerRR;
-    private ISchedulerFCFS schedulerFCFS;
-    private ISchedulerGeneral schedulerGeneral;
-    private IDispatcher dispatcher;
-    private IProcessManager processManager;
-    private IOurTime ourTime;
-    private List<IPrinter> printers;//2
-    private List<IScanner> scanners;//1
-    private List<IModem> modems;//1
-    private List<ICDDrive> cdDrives;//2
+    private final IDisplay display;
+    private final IRAM ram;
+    private final ICPU cpu;
+    private final IRealTimeQueue realTimeQueue;
+    private final IUserQueue userQueue;
+    private final ISchedulerRR schedulerRR;
+    private final ISchedulerFCFS schedulerFCFS;
+    private final ISchedulerGeneral schedulerGeneral;
+    private final IDispatcher dispatcher;
+    private final IProcessManager processManager;
+    private final IOurTime ourTime;
+    private final List<IPrinter> printers;//2
+    private final List<IScanner> scanners;//1
+    private final List<IModem> modems;//1
+    private final List<ICDDrive> cdDrivers;//2
     private IWaitingQueue waitingQueue;
 
+    public OS(IDisplay display,
+              IRAM ram,
+              ICPU cpu,
+              IRealTimeQueue realTimeQueue,
+              IUserQueue userQueue,
+              ISchedulerRR schedulerRR,
+              ISchedulerFCFS schedulerFCFS,
+              IDispatcher dispatcher,
+              IProcessManager processManager,
+              ISchedulerGeneral schedulerGeneral,
+              IOurTime ourTime,
+              List<IPrinter> printers,
+              List<IScanner> scanners,
+              List<IModem> modems,
+              List<ICDDrive> cdDrivers,
+              IWaitingQueue waitingQueue) {
+        this.display = display;
+        this.ram = ram;
+        this.cpu = cpu;
+        this.realTimeQueue = realTimeQueue;
+        this.userQueue = userQueue;
+        this.schedulerRR = schedulerRR;
+        this.schedulerFCFS = schedulerFCFS;
+        this.dispatcher = dispatcher;
+        this.processManager = processManager;
+        this.schedulerGeneral=schedulerGeneral;
+        this.ourTime = ourTime;
+        this.printers = printers;
+        this.scanners = scanners;
+        this.modems = modems;
+        this.cdDrivers = cdDrivers;
+        this.waitingQueue = waitingQueue;
+        Publisher.attach(this);
+    }
 
     @Override
     public void update() {
@@ -42,7 +77,7 @@ public class OS implements IOS {
 
     @Override
     public int getSequenceNumber() {
-        return 0;
+        return 3;
     }
 
     @Override

@@ -6,4 +6,6 @@ import main.java.utility.abstracts.IObserver;
 public interface ICPU extends IObserver {
     IProcess getProcessInExecution();
     void setProcess(IProcess process);
+
+    short getCounter();
 }
