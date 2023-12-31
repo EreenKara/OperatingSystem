@@ -1,22 +1,17 @@
 package main.java.pc.impl;
 
 import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
 
 import main.java.os.abstracts.IPCB;
 import main.java.pc.abstracts.IRAM;
 import main.java.pc.abstracts.IRAMFrames;
-import main.java.pc.impl.RamFrames;
 
 public class Ram implements IRAM {
 	   private int TotalRam;
 	   public int ramFrameSize;
 	   private IRAMFrames[] RamFrames;
-       private Map<Integer, IPCB> allocated ;
+       private Dictionary<Integer, IPCB> allocated ;
        
 	public Ram(int totalRam) {
 		this.ramFrameSize=8;
@@ -25,7 +20,7 @@ public class Ram implements IRAM {
 		{
 			RamFrames[i]=new RamFrames(ramFrameSize);
 		}
-		allocated= new HashMap<Integer, IPCB>();
+		allocated= new Hashtable<Integer, IPCB>();
 	}
 	
 	   private IPCB getPCBByID(int processID) {
@@ -115,8 +110,7 @@ public class Ram implements IRAM {
 
 	@Override
 	public IPCB search(int processID) {
-		
-		return null;
+		return allocated.get(processID);
 	}
     // sonradan
  	public int getTotalRam() {
@@ -127,17 +121,17 @@ public class Ram implements IRAM {
 		this.TotalRam=TotalRam;
 	}
 	
-	public boolean[] getRamFrames() {
+	public IRAMFrames[] getRamFrames() {
 	return  RamFrames;
 	}
-	public void setRamFrames(boolean[] RamFrames) 
+	public void setRamFrames(IRAMFrames[] RamFrames)
 	{
 		this.RamFrames=RamFrames;
 	}
 	@Override
 	public boolean addPCB(IPCB pcb) {
-		// TODO Auto-generated method stub
-		return false;
+		allocated.put(pcb.getProcessId(),pcb);
+		return true;
 	}
 	
 }

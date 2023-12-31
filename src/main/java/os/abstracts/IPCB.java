@@ -3,6 +3,7 @@ package main.java.os.abstracts;
 import main.java.iodevices.abstracts.IIODevice;
 import main.java.utility.enums.State;
 
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +35,9 @@ public interface IPCB {
 
     public void setIoDevices(List<IIODevice> ioDevices);
 
-    public Map<Integer, Integer> getMemoryOccupiedPageTable();
+    public Dictionary<Integer, Integer> getMemoryOccupiedPageTable();
 
-    public void setMemoryOccupiedPageTable(Map<Integer, Integer> memoryOccupiedPageTable) ;
+    public void setMemoryOccupiedPageTable(Dictionary<Integer, Integer> memoryOccupiedPageTable) ;
     public int getEstimatedWorkingTime() ;
 
     public void setEstimatedWorkingTime(int estimatedWorkingTime) ;

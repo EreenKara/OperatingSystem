@@ -53,7 +53,7 @@ public class ProcessManager implements IProcessManager {
     	
     	
     	if(ram.checkStatus(Integer.parseInt(requirements[3]))==Status.WAITED || !checkDevices(requirements)) {
-    		IPCB pcb =new PCB(Integer.parseInt(requirements[1]),State.WAITING,0,0,generateColor(),null,null);
+    		IPCB pcb =new PCB(Integer.parseInt(requirements[1]),State.WAITING,0,0,generateColor(),null,null,Integer.parseInt(requirements[0]));
     		ram.addPCB(pcb);
     		pid++;
     		return process;
@@ -97,7 +97,7 @@ public class ProcessManager implements IProcessManager {
 		
 		
 		
-		IPCB pcb =new PCB(Integer.parseInt(requirements[1]),State.CREATED,0,0,generateColor(),liste,ram.allocate(Integer.parseInt(requirements[3])));
+		IPCB pcb =new PCB(Integer.parseInt(requirements[1]),State.READY,0,0,generateColor(),liste,ram.allocate(Integer.parseInt(requirements[3])),Integer.parseInt(requirements[0]));
 		ram.addPCB(pcb);
 		pid++;
 		return process;
@@ -133,10 +133,52 @@ public class ProcessManager implements IProcessManager {
     	return true;
     }
     @Override
-    public boolean allocateDevicesAndRam(IProcess process) {
+    public IProcess allocateDevicesAndRam(IProcess process) {
+		if(checkDevices(process.getProcessProperties())&& ram.checkStatus(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED)
+		{
+			IPCB pcb = ram.search(process.getProcessId());
+
+			pcb.setState(State.READY);
+			pcb.setMemoryOccupiedPageTable(ram.allocate(Integer.parseInt(process.getProcessProperties()[3])));
+			// Allocated
+			List<IIODevice> liste=new ArrayList<IIODevice>();
+			int count =0;
+			for (var data : printers) {
+				if(count != Integer.parseInt(process.getProcessProperties()[4])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			count=0;
+			for (var data : scanners) {
+				if(count != Integer.parseInt(process.getProcessProperties()[5])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			count=0;
+			for (var data : modems) {
+				if(count != Integer.parseInt(process.getProcessProperties()[6])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			count=0;
+			for (var data : cdDrives) {
+				if(count != Integer.parseInt(process.getProcessProperties()[7])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			pcb.setIoDevices(liste);
+
+		}
     	
-    	
-        return false;
+        return process;
     }
     private int getUniqueProcessId()
     {

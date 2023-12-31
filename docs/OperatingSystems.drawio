@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-12-30T15:30:19.145Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="rZnXUYOI6BxEOpqxw-1t" version="22.1.16" type="device">
+<mxfile host="app.diagrams.net" modified="2023-12-30T23:40:04.105Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="sJsa1Ah_ilMK1ont3VLV" version="22.1.16" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="2883" dy="1699" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3497" dy="1965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -22,7 +22,7 @@
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-13" value="- Ekran: IEkran" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
           <mxGeometry y="130" width="240" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="JglUgxFQCHRtceC7MfkQ-8" value="- cdDriver : ICDDriver" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="XPo56Mp7-HnKYEz6nt2U-4">
+        <mxCell id="JglUgxFQCHRtceC7MfkQ-8" value="- cdDriver : ICDDriver" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
           <mxGeometry y="156" width="240" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ehvPjeEVP9A8o2XFfIN3-17" value="- Operating System: OS" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
@@ -34,7 +34,7 @@
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
           <mxGeometry y="234" width="240" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="XPo56Mp7-HnKYEz6nt2U-7" value="+turnOn&lt;span style=&quot;background-color: initial;&quot;&gt;(): void&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
+        <mxCell id="XPo56Mp7-HnKYEz6nt2U-7" value="+ turnOn&lt;span style=&quot;background-color: initial;&quot;&gt;(): void&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
           <mxGeometry y="242" width="240" height="26" as="geometry" />
         </mxCell>
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-8" value="+ turnOff(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-4" vertex="1">
@@ -85,7 +85,7 @@
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-24" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="XPo56Mp7-HnKYEz6nt2U-22" vertex="1">
           <mxGeometry y="96" width="250" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="JglUgxFQCHRtceC7MfkQ-3" value="Private&#39;ler yapılmak zorunda değil fikir vermesi açısından koydum." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="XPo56Mp7-HnKYEz6nt2U-22">
+        <mxCell id="JglUgxFQCHRtceC7MfkQ-3" value="Private&#39;ler yapılmak zorunda değil fikir vermesi açısından koydum." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-22" vertex="1">
           <mxGeometry y="104" width="250" height="46" as="geometry" />
         </mxCell>
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-25" value="- ProcessYurut(): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-22" vertex="1">
@@ -301,7 +301,7 @@
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-81" value="+ getProcess&amp;nbsp;(): Process" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-78" vertex="1">
           <mxGeometry y="97" width="270" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="JglUgxFQCHRtceC7MfkQ-5" value="+ shceduleRRProcess(): attribute" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="XPo56Mp7-HnKYEz6nt2U-78">
+        <mxCell id="JglUgxFQCHRtceC7MfkQ-5" value="+ shceduleRRProcess(): attribute" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-78" vertex="1">
           <mxGeometry y="123" width="270" height="26" as="geometry" />
         </mxCell>
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-89" value="+&amp;nbsp;scheduleGBGProcess&lt;span style=&quot;background-color: initial;&quot;&gt;(Process): void&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-78" vertex="1">
@@ -331,7 +331,7 @@
         <mxCell id="XPo56Mp7-HnKYEz6nt2U-91" value="+&amp;nbsp;scheduleCPUProcess&lt;span style=&quot;background-color: initial;&quot;&gt;(Process): void&lt;/span&gt;&lt;br&gt;Bu cpu&#39;dan quantum süresinde bitmemişs process&#39;i alıp queue&#39;da uygun yere yerlestirecek. Ya da OS tarafından gönderilen process&#39;i uygun eyere yerleştirecek" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-82" vertex="1">
           <mxGeometry y="260" width="320" height="68" as="geometry" />
         </mxCell>
-        <mxCell id="JglUgxFQCHRtceC7MfkQ-4" value="+&amp;nbsp;scheduleOsProcess&lt;span style=&quot;background-color: initial;&quot;&gt;(Process): void&lt;/span&gt;&lt;br&gt;Bu cpu&#39;dan quantum süresinde bitmemişs process&#39;i alıp queue&#39;da uygun yere yerlestirecek. Ya da OS tarafından gönderilen process&#39;i uygun eyere yerleştirecek" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="XPo56Mp7-HnKYEz6nt2U-82">
+        <mxCell id="JglUgxFQCHRtceC7MfkQ-4" value="+&amp;nbsp;scheduleOsProcess&lt;span style=&quot;background-color: initial;&quot;&gt;(Process): void&lt;/span&gt;&lt;br&gt;Bu cpu&#39;dan quantum süresinde bitmemişs process&#39;i alıp queue&#39;da uygun yere yerlestirecek. Ya da OS tarafından gönderilen process&#39;i uygun eyere yerleştirecek" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-82" vertex="1">
           <mxGeometry y="328" width="320" height="68" as="geometry" />
         </mxCell>
         <mxCell id="ehvPjeEVP9A8o2XFfIN3-1" value="- Process kontrol() : attribute&lt;br&gt;Hali hazırda calisan process&#39;in onceligini kontrol et FCFS mi yoksa RR mi ona gore processgetir()&#39;i çağır." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-82" vertex="1">
@@ -361,7 +361,7 @@
         <mxCell id="ehvPjeEVP9A8o2XFfIN3-86" value="- Yazıcı: IYazıcı Bunlar List olabilir" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-96" vertex="1">
           <mxGeometry y="100" width="330" height="28" as="geometry" />
         </mxCell>
-        <mxCell id="JglUgxFQCHRtceC7MfkQ-7" value="- cdDriver : ICDDriver" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="XPo56Mp7-HnKYEz6nt2U-96">
+        <mxCell id="JglUgxFQCHRtceC7MfkQ-7" value="- cdDriver : ICDDriver" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-96" vertex="1">
           <mxGeometry y="128" width="330" height="26" as="geometry" />
         </mxCell>
         <mxCell id="ehvPjeEVP9A8o2XFfIN3-87" value="- Tarayıcı&amp;nbsp;:ITarayıcı" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="XPo56Mp7-HnKYEz6nt2U-96" vertex="1">
@@ -613,7 +613,7 @@
         <mxCell id="ojoNzWy3ps6btbPR5Wlg-8" value="+ factoryMethod(): Bilgisayar" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ojoNzWy3ps6btbPR5Wlg-5" vertex="1">
           <mxGeometry y="60" width="270" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="JglUgxFQCHRtceC7MfkQ-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ISchedulerGeneral&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;scheduleProcess&lt;span style=&quot;background-color: initial;&quot;&gt;(IProcess process): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getProcess : Process&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;strokeColor=#007FFF;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="JglUgxFQCHRtceC7MfkQ-1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ISchedulerGeneral&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+&amp;nbsp;scheduleProcess&lt;span style=&quot;background-color: initial;&quot;&gt;(IProcess process): void&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getProcess : Process&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;strokeColor=#007FFF;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="730" y="159.5" width="283" height="91" as="geometry" />
         </mxCell>
       </root>
