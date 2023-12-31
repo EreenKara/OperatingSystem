@@ -40,106 +40,124 @@ public class ProcessManager implements IProcessManager, IObserver {
     }
     @Override //oluşturmak için
     public IProcess createProcess(String[] requirements) {
-    	// , State state, int programCounter, int workingTime, String processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
+		// , State state, int programCounter, int workingTime, String processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
 		String redColor = "\u001B[31m";
 		String resetColor = "\u001B[0m";
-		if(ram.checkStatus(Integer.parseInt(requirements[3]) )==Status.DELETED) {
-			System.out.printf(redColor+"NOT ENOUGH RAM! PROCESS RAM: %s",requirements[3]);
-			System.out.println(" -- PROCESS DELETED"+resetColor);
+		if (requirements[1]=="0"&& Integer.parseInt(requirements[3])>64) {
+			System.out.printf(redColor + "THAT MUCH SPACE MUST NOT BE NEEDED BY REAL TIME PROCESSES : ! PROCESS RAM: %s", requirements[3]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
+			return null;
+		} else if (ram.checkStatus(Integer.parseInt(requirements[3])) == Status.DELETED) {
+			System.out.printf(redColor + "NOT ENOUGH RAM! PROCESS RAM: %s", requirements[3]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
 			return null;
 		}
-    	else if(printers.size() < Integer.parseInt(requirements[4])) {
-			System.out.printf(redColor+"NOT ENOUGH PRINTERS! REQUIRED PRINTERS: %s",requirements[4]);
-			System.out.println(" -- PROCESS DELETED"+resetColor);
-			return null;}
-    	else if(scanners.size() < Integer.parseInt(requirements[5])){
-			System.out.printf(redColor+"NOT ENOUGH SCANNERS! REQUIRED SCANNERS: %s",requirements[5]);
-			System.out.println(" -- PROCESS DELETED"+resetColor);
-			return null;}
-    	else if(modems.size() < Integer.parseInt(requirements[6])) {
-			System.out.printf(redColor+"NOT ENOUGH MODEMS! REQUIRED MODEMS: %s",requirements[6]);
-			System.out.println(" -- PROCESS DELETED"+resetColor);
+		else if(requirements[1]=="0"&&( Integer.parseInt(requirements[4])>0 || Integer.parseInt(requirements[5])>0|| Integer.parseInt(requirements[6])>0|| Integer.parseInt(requirements[7])>0)){
+			System.out.printf(redColor + "I/O MUST NOT BE NEEDED BY REAL TIME PROCESSES : ! I/O DEVICES: %s %s %s %s", requirements[4] , requirements[5] , requirements[6] , requirements[7]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
 			return null;
 		}
-    	else if(cdDrivers.size() < Integer.parseInt(requirements[7])) {
-			System.out.printf(redColor+"NOT ENOUGH CD DRIVERS! REQUIRED CD DRIVERS: %s",requirements[7]);
-			System.out.println(" -- PROCESS DELETED"+resetColor);
+		else if (printers.size() < Integer.parseInt(requirements[4])) {
+			System.out.printf(redColor + "NOT ENOUGH PRINTERS! REQUIRED PRINTERS: %s", requirements[4]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
+			return null;
+		} else if (scanners.size() < Integer.parseInt(requirements[5])) {
+			System.out.printf(redColor + "NOT ENOUGH SCANNERS! REQUIRED SCANNERS: %s", requirements[5]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
+			return null;
+		} else if (modems.size() < Integer.parseInt(requirements[6])) {
+			System.out.printf(redColor + "NOT ENOUGH MODEMS! REQUIRED MODEMS: %s", requirements[6]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
+			return null;
+		} else if (cdDrivers.size() < Integer.parseInt(requirements[7])) {
+			System.out.printf(redColor + "NOT ENOUGH CD DRIVERS! REQUIRED CD DRIVERS: %s", requirements[7]);
+			System.out.println(" -- PROCESS DELETED" + resetColor);
 			return null;
 		}
 
-    	IProcess process= new Process(requirements,pid,Integer.parseInt(requirements[1]));
-    	// processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
+		IProcess process= new Process(requirements,pid,Integer.parseInt(requirements[1]));
+		// processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
+		IPCB pcb; // PCB asla null olmuyor aşağıdaki else'e kesin girecek o yüzden null kontrolüne gerek yok
+		if(requirements[1]=="0" && (ram.checkStatusForRealTimeProcesses(Integer.parseInt(requirements[3]))==Status.WAITED)){
+			pcb =new PCB(pid,State.WAITING,0,0,Integer.parseInt(requirements[2]),generateColor(),null,Integer.parseInt(requirements[0]),null);
 
-
-    	if(ram.checkStatus(Integer.parseInt(requirements[3]))==Status.WAITED || !checkDevices(requirements)) {
-    		IPCB pcb =new PCB(pid,State.WAITING,0,0,Integer.parseInt(requirements[2]),generateColor(),null,Integer.parseInt(requirements[0]),null);
-    		ram.addPCB(pcb);
-    		pid++;
-    		return process;
-    	}
-
-
-		 // Allocated
-		List<IIODevice> liste=new ArrayList<>();
-		int count =0;
-		for (var data : printers) {
-			if(count != Integer.parseInt(requirements[4])) {
-				data.allocate(process);
-				liste.add(data);
-				count++;
-			}
 		}
-		count=0;
-		for (var data : scanners) {
-			if(count != Integer.parseInt(requirements[5])) {
-				data.allocate(process);
-				liste.add(data);
-				count++;
-			}
-		}
-		count=0;
-		for (var data : modems) {
-			if(count != Integer.parseInt(requirements[6])) {
-				data.allocate(process);
-				liste.add(data);
-				count++;
-			}
-		}
-		count=0;
-		for (var data : cdDrivers) {
-			if(count != Integer.parseInt(requirements[7])) {
-				data.allocate(process);
-				liste.add(data);
-				count++;
-			}
+		else if(ram.checkStatus(Integer.parseInt(requirements[3]))==Status.WAITED || !checkDevices(requirements)) {
+			pcb =new PCB(pid,State.WAITING,0,0,Integer.parseInt(requirements[2]),generateColor(),null,Integer.parseInt(requirements[0]),null);
 		}
 
 
+		// Allocated
+		if(requirements[1]=="0")
+		{
+			pcb =new PCB(pid,State.READY,0,0,Integer.parseInt(requirements[2]),generateColor(),null,Integer.parseInt(requirements[0]),ram.allocateForRealTimeProcesses(Integer.parseInt(requirements[3])));
+		}
+		else{
+			List<IIODevice> liste=new ArrayList<>();
+			int count =0;
+			for (var data : printers) {
+				if(count != Integer.parseInt(requirements[4])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			count=0;
+			for (var data : scanners) {
+				if(count != Integer.parseInt(requirements[5])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			count=0;
+			for (var data : modems) {
+				if(count != Integer.parseInt(requirements[6])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
+			count=0;
+			for (var data : cdDrivers) {
+				if(count != Integer.parseInt(requirements[7])) {
+					data.allocate(process);
+					liste.add(data);
+					count++;
+				}
+			}
 
-		IPCB pcb =new PCB(pid,State.READY,0,0,Integer.parseInt(requirements[2]),generateColor(),liste,Integer.parseInt(requirements[0]),ram.allocate(Integer.parseInt(requirements[3])));
+
+			pcb =new PCB(pid,State.READY,0,0,Integer.parseInt(requirements[2]),generateColor(),liste,Integer.parseInt(requirements[0]),ram.allocate(Integer.parseInt(requirements[3])));
+		}
+
+
 		ram.addPCB(pcb);
 		pid++;
 		return process;
 
 
+
+
     }
     private boolean checkDevices(String[] requirements) {
-    	int wantedPrinter=Integer.parseInt(requirements[4]);
-    	int wantedScanner=Integer.parseInt(requirements[5]);
-    	int wantedModem=Integer.parseInt(requirements[6]);
-    	int wantedCDDriver=Integer.parseInt(requirements[7]);
+		int wantedPrinter=Integer.parseInt(requirements[4]);
+		int wantedScanner=Integer.parseInt(requirements[5]);
+		int wantedModem=Integer.parseInt(requirements[6]);
+		int wantedCDDriver=Integer.parseInt(requirements[7]);
 		if(!checkAvailabilityOfDevices(wantedPrinter,printers))
 			return false;
-    	if(!checkAvailabilityOfDevices(wantedScanner,scanners))
+		if(!checkAvailabilityOfDevices(wantedScanner,scanners))
 			return false;
-    	if(!checkAvailabilityOfDevices(wantedModem,modems))
+		if(!checkAvailabilityOfDevices(wantedModem,modems))
 			return false;
-    	if(!checkAvailabilityOfDevices(wantedCDDriver, cdDrivers))
+		if(!checkAvailabilityOfDevices(wantedCDDriver, cdDrivers))
 			return false;
 		return true;
     }
+
 	private boolean checkAvailabilityOfDevices(int wantedDeviceAmount,List<? extends IIODevice> deviceList){
-	 	int count=0;
+		int count=0;
 		for (var data : deviceList) {
 			if(data.checkStatus()) count++;
 		}
@@ -148,8 +166,7 @@ public class ProcessManager implements IProcessManager, IObserver {
 
     @Override
     public IProcess allocateDevicesAndRam(IProcess process) {
-		if(checkDevices(process.getProcessProperties())&& ram.checkStatus(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED)
-		{
+		if(checkDevices(process.getProcessProperties())&& ram.checkStatus(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED) {
 			IPCB pcb = ram.search(process.getProcessId());
 
 			pcb.setState(State.READY);

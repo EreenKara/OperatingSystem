@@ -7,9 +7,11 @@ import java.util.Map;
 
 public interface IRAM {
     Map<Integer,Integer> allocate(int memorySize );
+    Map<Integer,Integer> allocateForRealTimeProcesses(int memorySize);
     void addPCB(IPCB pcb);
     IPCB search(int processID);
     Status checkStatus(int memorySize);
+    Status checkStatusForRealTimeProcesses(int memorySize);
     Map<Integer,IPCB> getPCBList();
     void deAllocate(Map<Integer,Integer> map);
 }
