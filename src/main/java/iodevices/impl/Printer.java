@@ -5,7 +5,7 @@ import main.java.os.abstracts.IProcess;
 
 public class Printer implements IPrinter {
     private int _currentProcessId = -1;
-    private boolean _availableProcess = true;
+    private boolean availableDevice = true;
     private int printerId;
 
     public Printer(int printerId)
@@ -15,7 +15,7 @@ public class Printer implements IPrinter {
 
     @Override
     public boolean checkStatus() {  //
-        return _availableProcess;
+        return availableDevice;
     }
 
     @Override
@@ -23,12 +23,17 @@ public class Printer implements IPrinter {
         if(checkStatus())
         {
             _currentProcessId = process.getProcessId();
-            _availableProcess = false;
+            availableDevice = false;
             return true;
         }
         return false;
     }
-
+    @Override
+    public boolean deAllocate() {
+        availableDevice=true;
+        _currentProcessId=-1;
+        return true;
+    }
     @Override
     public int checkWhichProcessUsingTheDevice() {
         return _currentProcessId;

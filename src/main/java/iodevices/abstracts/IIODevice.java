@@ -6,6 +6,7 @@ import main.java.os.impl.ProcessManager;
 public interface IIODevice {
     boolean checkStatus();
     boolean allocate(IProcess process);
+    boolean deAllocate();
     // Geriye process'in unique idsi dönecek
     int checkWhichProcessUsingTheDevice();
 

@@ -40,7 +40,13 @@ public class Ram implements IRAM {
 			}
 			return Status.WAITED;
 	   }
-	   public Dictionary<Integer, Integer> allocate(int memorysize){
+
+	@Override
+	public Dictionary<Integer, IPCB> getPCBList() {
+		return allocated;
+	}
+
+	public Dictionary<Integer, Integer> allocate(int memorysize){
 		   int frameMiktari=(int)(Math.ceil(memorysize/8));
 		   Dictionary<Integer,Integer> pageTable= new Hashtable<Integer, Integer>();
 		   int count =0;
@@ -55,6 +61,9 @@ public class Ram implements IRAM {
 			}
 		   return pageTable;
 		   
+	   }
+	   public void deAllocate(Dictionary<Integer,Integer> liste){
+			liste.elements().asIterator().forEachRemaining(frame->ramFrames[frame].truncateFrame());
 	   }
 
 //	public boolean CheckPCB() {

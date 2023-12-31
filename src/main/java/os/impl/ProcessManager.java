@@ -16,9 +16,10 @@ import main.java.os.abstracts.IProcessManager;
 import main.java.pc.abstracts.IRAM;
 import main.java.pc.impl.Ram;
 import main.java.pc.impl.Status;
+import main.java.utility.abstracts.IObserver;
 import main.java.utility.enums.State;
 
-public class ProcessManager implements IProcessManager {
+public class ProcessManager implements IProcessManager, IObserver {
 
     private final IRAM ram;
     private List<IPrinter> printers;//2
@@ -42,24 +43,24 @@ public class ProcessManager implements IProcessManager {
     @Override //oluşturmak için
     public IProcess createProcess(String[] requirements) {
     	// , State state, int programCounter, int workingTime, String processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
-    	if(ram.checkStatus(Integer.parseInt(requirements[3]) )==Status.DELETED) return null; 
+    	if(ram.checkStatus(Integer.parseInt(requirements[3]) )==Status.DELETED) return null;
     	else if(printers.size() < Integer.parseInt(requirements[4])) return null;
     	else if(scanners.size() < Integer.parseInt(requirements[5])) return null;
     	else if(modems.size() < Integer.parseInt(requirements[6])) return null;
     	else if(cdDrives.size() < Integer.parseInt(requirements[7])) return null;
-    	
-    	IProcess process= new Process(requirements,pid,Integer.parseInt(requirements[1]));    	
+
+    	IProcess process= new Process(requirements,pid,Integer.parseInt(requirements[1]));
     	// processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
-    	
-    	
+
+
     	if(ram.checkStatus(Integer.parseInt(requirements[3]))==Status.WAITED || !checkDevices(requirements)) {
     		IPCB pcb =new PCB(pid,State.WAITING,0,0,Integer.parseInt(requirements[2]),generateColor(),null,Integer.parseInt(requirements[0]),null);
     		ram.addPCB(pcb);
     		pid++;
     		return process;
     	}
-    	
-    	
+
+
 		 // Allocated
 		List<IIODevice> liste=new ArrayList<IIODevice>();
 		int count =0;
@@ -94,14 +95,14 @@ public class ProcessManager implements IProcessManager {
 				count++;
 			}
 		}
-		
-		
-		
+
+
+
 		IPCB pcb =new PCB(pid,State.READY,0,0,Integer.parseInt(requirements[2]),generateColor(),liste,Integer.parseInt(requirements[0]),ram.allocate(Integer.parseInt(requirements[3])));
 		ram.addPCB(pcb);
 		pid++;
 		return process;
-    	
+
 
     }
     private boolean checkDevices(String[] requirements) {
@@ -129,7 +130,7 @@ public class ProcessManager implements IProcessManager {
     		if(data.checkStatus()) count++;
 		}
     	if(count < wantedCDDriver) return false;
-    	
+
     	return true;
     }
     @Override
@@ -177,15 +178,31 @@ public class ProcessManager implements IProcessManager {
 			pcb.setIoDevices(liste);
 
 		}
-    	
+
         return process;
     }
     private int getUniqueProcessId()
     {
         return pid++;
     }
-    
-    
+
+	@Override
+	public void update() {
+		ram.getPCBList().elements().asIterator().forEachRemaining(pcb->{
+			if(pcb.getState()==State.TERMINATED){
+				pcb.getIoDevices().stream().forEach(device->device.deAllocate());
+				ram.deAllocate(pcb.getMemoryOccupiedPageTable());
+			}
+		});
+
+	}
+
+	@Override
+	public int getSequenceNumber() {
+		return 0;
+	}
+
+
 //    //sonlandırmak için
 //    public boolean terminateProcess(int processID) {
 //        IPCB terminatedProcess = null;

@@ -4,7 +4,7 @@ import main.java.iodevices.abstracts.IModem;
 import main.java.os.abstracts.IProcess;
 
 public class Modem implements IModem {
-    private boolean _availableProcess = true;
+    private boolean availableDevice = true;
     private int _currentProcessId = -1;
     private int modemId;
 
@@ -14,7 +14,7 @@ public class Modem implements IModem {
 
     @Override
     public boolean checkStatus() {
-        return _availableProcess;
+        return availableDevice;
     }
 
     @Override
@@ -22,12 +22,17 @@ public class Modem implements IModem {
         if(checkStatus())
         {
             _currentProcessId = process.getProcessId();
-            _availableProcess = false;
+            availableDevice = false;
             return true;
         }
         return false;
     }
-
+    @Override
+    public boolean deAllocate() {
+        availableDevice=true;
+        _currentProcessId=-1;
+        return true;
+    }
     @Override
     public int checkWhichProcessUsingTheDevice() {
         return _currentProcessId;

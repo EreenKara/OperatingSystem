@@ -4,7 +4,7 @@ import main.java.iodevices.abstracts.ICDDrive;
 import main.java.os.abstracts.IProcess;
 
 public class CDDrive implements ICDDrive {
-    private boolean _availableProcess = true;
+    private boolean availableDevice = true;
     private int _currentProcessId = -1;
     private int cdDriveId;
 
@@ -14,7 +14,7 @@ public class CDDrive implements ICDDrive {
 
     @Override
     public boolean checkStatus() {
-        return _availableProcess;
+        return availableDevice;
     }
 
     @Override
@@ -22,10 +22,17 @@ public class CDDrive implements ICDDrive {
         if(checkStatus())
         {
             _currentProcessId = process.getProcessId();
-            _availableProcess = false;
+            availableDevice = false;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean deAllocate() {
+        availableDevice=true;
+        _currentProcessId=-1;
+        return true;
     }
 
     @Override

@@ -69,6 +69,9 @@ public class OS implements IOS {
         this.waitingQueue = waitingQueue;
         Publisher.attach(this);
     }
+    private void truncateRam(){
+        realTimeQueue
+    }
 
     @Override
     public void update() {
