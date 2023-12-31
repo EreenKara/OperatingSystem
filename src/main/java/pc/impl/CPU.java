@@ -24,6 +24,10 @@ public class CPU implements ICPU {
     }
 
     public void setProcess(IProcess process) {
+        if(process!=null)
+        {
+            System.out.println("PID: "+process.getProcessId()+" is set to execute");
+        }
         this.process = process;
     }
 
@@ -38,8 +42,6 @@ public class CPU implements ICPU {
 
         IPCB pcb = ram.search(process.getProcessId());
         pcb.setState(State.RUNNING);
-
-        display.print("\033[38;5;" + pcb.getProcessColor() + "m\033[0m");
 
         int cdDriveCounter=0;
         int modemCounter=0;
@@ -69,14 +71,16 @@ public class CPU implements ICPU {
                 scannerCounter,modemCounter,cdDriveCounter,pcb.getState().name())
         );
 
+        pcb.setWorkingTime(pcb.getWorkingTime()+1);
         if(pcb.getWorkingTime()==pcb.getEstimatedTime())
         {
             pcb.setState(State.TERMINATED);
-            return;
+            System.out.printf(String.format("\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
+                    pcb.getEstimatedTime(),process.getProcessProperties()[3], printerCounter,
+                    scannerCounter,modemCounter,cdDriveCounter,pcb.getState().name())
+            );
         }
-        pcb.setWorkingTime(pcb.getWorkingTime()+1);
     }
-
     @Override
     public IProcess getProcessInExecution() {
         if(process==null)

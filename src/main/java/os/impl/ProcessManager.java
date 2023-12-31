@@ -18,6 +18,7 @@ import main.java.pc.impl.Ram;
 import main.java.pc.impl.Status;
 import main.java.utility.abstracts.IObserver;
 import main.java.utility.enums.State;
+import main.java.utility.impl.OurTime;
 import main.java.utility.impl.Publisher;
 
 public class ProcessManager implements IProcessManager, IObserver {
@@ -190,13 +191,14 @@ public class ProcessManager implements IProcessManager, IObserver {
 
 	@Override
 	public void update() {
-		ram.getPCBList().elements().asIterator().forEachRemaining(pcb->{
-			if(pcb.getState()==State.TERMINATED){
-				pcb.getIoDevices().stream().forEach(device->device.deAllocate());
+		for (Map.Entry<Integer, IPCB> entry : ram.getPCBList().entrySet()) {
+			IPCB pcb=entry.getValue();
+			if(pcb.getState()==State.TERMINATED)
+			{
+				pcb.getIoDevices().forEach(IIODevice::deAllocate);
 				ram.deAllocate(pcb.getMemoryOccupiedPageTable());
 			}
-		});
-
+		}
 	}
 
 	@Override

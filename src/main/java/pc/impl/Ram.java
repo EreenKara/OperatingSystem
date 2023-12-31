@@ -2,6 +2,7 @@ package main.java.pc.impl;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Map;
 
 import main.java.os.abstracts.IPCB;
 import main.java.pc.abstracts.IRAM;
@@ -11,7 +12,7 @@ public class Ram implements IRAM {
 	   private int totalRam;
 	   public int ramFrameSize;
 	   private IRAMFrames[] ramFrames;
-       private Dictionary<Integer, IPCB> allocated ;
+       private Map<Integer, IPCB> allocated ;
        
 	public Ram(int totalRam) {
 		this.ramFrameSize=8;
@@ -42,13 +43,13 @@ public class Ram implements IRAM {
 	   }
 
 	@Override
-	public Dictionary<Integer, IPCB> getPCBList() {
+	public Map<Integer, IPCB> getPCBList() {
 		return allocated;
 	}
 
-	public Dictionary<Integer, Integer> allocate(int memorysize){
+	public Map<Integer, Integer> allocate(int memorysize){
 		   int frameMiktari=(int)(Math.ceil(memorysize/8));
-		   Dictionary<Integer,Integer> pageTable= new Hashtable<Integer, Integer>();
+		   Map<Integer,Integer> pageTable= new Hashtable<Integer, Integer>();
 		   int count =0;
 		   for(int i = 0; i< totalRam /ramFrameSize; i++) {
 				if(!(ramFrames[i].checkAllocated())) {
@@ -62,8 +63,10 @@ public class Ram implements IRAM {
 		   return pageTable;
 		   
 	   }
-	   public void deAllocate(Dictionary<Integer,Integer> liste){
-			liste.elements().asIterator().forEachRemaining(frame->ramFrames[frame].truncateFrame());
+	   public void deAllocate(Map<Integer,Integer> liste){
+		   for (Map.Entry<Integer, Integer> entry : liste.entrySet()) {
+			   ramFrames[entry.getValue()].truncateFrame();
+		   }
 	   }
 
 //	public boolean CheckPCB() {

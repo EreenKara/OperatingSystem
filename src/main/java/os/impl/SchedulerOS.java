@@ -21,6 +21,8 @@ public class SchedulerOS implements ISchedulerOS {
     public IProcess getProcess() {
         IProcess process;
         IProcess prevExecutedProcess;
+        if(dispatcher.isProcessInFCFS())
+            return null;
         if ((process = schedulerFCFS.getProcess()) != null) {
             prevExecutedProcess = dispatcher.ContextSwitch(process);
         } else if ((process = schedulerRR.getProcess()) != null) {

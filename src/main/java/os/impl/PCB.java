@@ -6,6 +6,7 @@ import main.java.utility.enums.State;
 
 import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 
 public class PCB implements IPCB {
     private int processId;
@@ -16,7 +17,7 @@ public class PCB implements IPCB {
     private String processColor;
     private List<IIODevice> ioDevices;
     private int arrivingTime;
-    private Dictionary<Integer, Integer> memoryOccupiedPageTable;
+    private Map<Integer, Integer> memoryOccupiedPageTable;
 
     public int getArrivingTime() {
         return arrivingTime;
@@ -29,7 +30,7 @@ public class PCB implements IPCB {
 
     public PCB(int processId, State state, int programCounter,
                int workingTime, int estimatedTime, String processColor, List<IIODevice> ioDevices,
-               int arrivingTime, Dictionary<Integer, Integer> memoryOccupiedPageTable) {
+               int arrivingTime, Map<Integer, Integer> memoryOccupiedPageTable) {
         this.processId = processId;
         this.state = state;
         this.programCounter = programCounter;
@@ -97,11 +98,11 @@ public class PCB implements IPCB {
         this.ioDevices = ioDevices;
     }
 
-    public Dictionary<Integer, Integer> getMemoryOccupiedPageTable() {
+    public Map<Integer, Integer> getMemoryOccupiedPageTable() {
         return memoryOccupiedPageTable;
     }
 
-    public void setMemoryOccupiedPageTable(Dictionary<Integer, Integer> memoryOccupiedPageTable) {
+    public void setMemoryOccupiedPageTable(Map<Integer, Integer> memoryOccupiedPageTable) {
         this.memoryOccupiedPageTable = memoryOccupiedPageTable;
     }
 }

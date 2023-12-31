@@ -35,9 +35,9 @@ public interface IPCB {
 
     public void setIoDevices(List<IIODevice> ioDevices);
 
-    public Dictionary<Integer, Integer> getMemoryOccupiedPageTable();
+    public Map<Integer, Integer> getMemoryOccupiedPageTable();
 
-    public void setMemoryOccupiedPageTable(Dictionary<Integer, Integer> memoryOccupiedPageTable) ;
+    public void setMemoryOccupiedPageTable(Map<Integer, Integer> memoryOccupiedPageTable) ;
 
     public int getArrivingTime();
 

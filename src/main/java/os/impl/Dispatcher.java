@@ -27,6 +27,13 @@ public class Dispatcher implements IDispatcher {
         cpu.setProcess(process);
     }
 
+    public boolean isProcessInFCFS()
+    {
+        IProcess process= cpu.getProcessInExecution();
+        if(process==null)return false;
+        return process.getPriority()==0;
+    }
+
     private void saveProcessState(){
     }
 
