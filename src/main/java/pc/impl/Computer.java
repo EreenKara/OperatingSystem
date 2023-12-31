@@ -73,7 +73,7 @@ public class Computer implements IComputer {
                 dispatcher,
                 new ProcessManager(ram,printers,scanners,modems,cdDrivers),
                 new SchedulerOS(schedulerRR,schedulerFCFS,dispatcher),
-                new OurTime(3),
+                new OurTime(1),
                 printers,
                 scanners,
                 modems,

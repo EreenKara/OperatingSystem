@@ -64,11 +64,9 @@ public class CPU implements ICPU {
                 cdDriveCounter++;
             }
         }
-        System.out.printf(
-                "\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",
-                pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
+        System.out.printf(String.format("\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
                 pcb.getEstimatedTime(),process.getProcessProperties()[3], printerCounter,
-                scannerCounter,modemCounter,cdDriveCounter,pcb.getState().name()
+                scannerCounter,modemCounter,cdDriveCounter,pcb.getState().name())
         );
 
         if(pcb.getWorkingTime()==pcb.getEstimatedTime())
@@ -81,6 +79,11 @@ public class CPU implements ICPU {
 
     @Override
     public IProcess getProcessInExecution() {
+        if(process==null)
+            return null;
+        IPCB pcb=ram.search(process.getProcessId());
+        if(pcb.getState()==State.TERMINATED)
+            return null;
         return process;
     }
 

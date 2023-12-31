@@ -36,7 +36,7 @@ public class ProcessManager implements IProcessManager {
         this.cdDrives=cdDrives;
     }
     private String generateColor() {
-        int colorCode = new Random().nextInt()%256;
+        int colorCode = pid;
         return Integer.toString(colorCode);
     }
     @Override //oluşturmak için
@@ -53,7 +53,7 @@ public class ProcessManager implements IProcessManager {
     	
     	
     	if(ram.checkStatus(Integer.parseInt(requirements[3]))==Status.WAITED || !checkDevices(requirements)) {
-    		IPCB pcb =new PCB(Integer.parseInt(requirements[1]),State.WAITING,0,0,generateColor(),null,null,Integer.parseInt(requirements[0]));
+    		IPCB pcb =new PCB(pid,State.WAITING,0,0,Integer.parseInt(requirements[2]),generateColor(),null,Integer.parseInt(requirements[0]),null);
     		ram.addPCB(pcb);
     		pid++;
     		return process;
@@ -97,7 +97,7 @@ public class ProcessManager implements IProcessManager {
 		
 		
 		
-		IPCB pcb =new PCB(Integer.parseInt(requirements[1]),State.READY,0,0,generateColor(),liste,ram.allocate(Integer.parseInt(requirements[3])),Integer.parseInt(requirements[0]));
+		IPCB pcb =new PCB(pid,State.READY,0,0,Integer.parseInt(requirements[2]),generateColor(),liste,Integer.parseInt(requirements[0]),ram.allocate(Integer.parseInt(requirements[3])));
 		ram.addPCB(pcb);
 		pid++;
 		return process;

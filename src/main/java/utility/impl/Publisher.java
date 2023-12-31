@@ -19,6 +19,6 @@ public class Publisher{
     }
 
     public static void ourNotify() {
-        observers.forEach(IObserver::update);
+        observers.forEach(observer-> observer.update());
     }
 }

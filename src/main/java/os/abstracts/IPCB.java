@@ -38,9 +38,6 @@ public interface IPCB {
     public Dictionary<Integer, Integer> getMemoryOccupiedPageTable();
 
     public void setMemoryOccupiedPageTable(Dictionary<Integer, Integer> memoryOccupiedPageTable) ;
-    public int getEstimatedWorkingTime() ;
-
-    public void setEstimatedWorkingTime(int estimatedWorkingTime) ;
 
     public int getArrivingTime();
 
