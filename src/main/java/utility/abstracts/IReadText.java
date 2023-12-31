@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IReadText {
     void read(String path);
-    List<String[]> getListText(); //
+    List<String[]> getListText();
 
 }

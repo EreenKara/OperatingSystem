@@ -53,9 +53,6 @@ public class UserQueue implements IUserQueue {
         {
             process=priority3.remove();
         }
-        else{
-            System.out.println("No process in user queues found");
-        }
         return process;
     }
 }

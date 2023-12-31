@@ -6,7 +6,7 @@ import main.java.os.abstracts.IProcess;
 public class Scanner implements IScanner {
     private boolean availableDevice = true;
     private int _currentProcessId = -1;
-    private int scannerId;
+    private final int scannerId;
 
     public Scanner(int scannerId) {
         this.scannerId = scannerId;
@@ -17,10 +17,9 @@ public class Scanner implements IScanner {
         return availableDevice;
     }
     @Override
-    public boolean deAllocate() {
+    public void deAllocate() {
         availableDevice=true;
         _currentProcessId=-1;
-        return true;
     }
     @Override
     public boolean allocate(IProcess process) {

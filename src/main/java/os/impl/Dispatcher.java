@@ -1,12 +1,8 @@
 package main.java.os.impl;
 
 import main.java.os.abstracts.IDispatcher;
-import main.java.os.abstracts.IPCB;
 import main.java.os.abstracts.IProcess;
 import main.java.pc.abstracts.ICPU;
-import main.java.pc.abstracts.IRAM;
-import main.java.pc.impl.CPU;
-import main.java.utility.enums.State;
 
 public class Dispatcher implements IDispatcher {
 
@@ -19,6 +15,7 @@ public class Dispatcher implements IDispatcher {
     @Override
     public IProcess ContextSwitch(IProcess newProcess) {
         IProcess prevExecutedProcess= cpu.getProcessInExecution();
+        if(newProcess==null&&prevExecutedProcess!=null)return null;
         uploadProcess(newProcess);
         return prevExecutedProcess;
     }
@@ -27,18 +24,9 @@ public class Dispatcher implements IDispatcher {
         cpu.setProcess(process);
     }
 
-    public boolean isProcessInFCFS()
-    {
-        IProcess process= cpu.getProcessInExecution();
-        if(process==null)return false;
-        return process.getPriority()==0;
+    public boolean isProcessInFCFS() {
+        IProcess process = cpu.getProcessInExecution();
+        if (process == null) return false;
+        return process.getPriority() == 0;
     }
-
-    private void saveProcessState(){
-    }
-
-    private void endProcess(){
-
-    }
-
 }

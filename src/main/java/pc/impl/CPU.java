@@ -12,8 +12,8 @@ import main.java.utility.impl.Publisher;
 public class CPU implements ICPU {
     private IProcess process;
     private short counter;
-    private IRAM ram;
-    private IDisplay display;
+    private final IRAM ram;
+    private final IDisplay display;
 
     public CPU(IRAM ram, IDisplay display) {
         this.process=null;
@@ -26,7 +26,7 @@ public class CPU implements ICPU {
     public void setProcess(IProcess process) {
         if(process!=null)
         {
-            System.out.println("PID: "+process.getProcessId()+" is set to execute");
+            display.print("PID: "+process.getProcessId()+" is set to execute");
         }
         this.process = process;
     }
@@ -66,7 +66,7 @@ public class CPU implements ICPU {
                 cdDriveCounter++;
             }
         }
-        System.out.printf(String.format("\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
+        display.print(String.format("\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
                 pcb.getEstimatedTime(),process.getProcessProperties()[3], printerCounter,
                 scannerCounter,modemCounter,cdDriveCounter,pcb.getState().name())
         );
@@ -75,7 +75,7 @@ public class CPU implements ICPU {
         if(pcb.getWorkingTime()==pcb.getEstimatedTime())
         {
             pcb.setState(State.TERMINATED);
-            System.out.printf(String.format("\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
+            display.print(String.format("\u001B[38;5;%sm%d %d %d %d %s %d %d %d %d %s\u001B[0m%n",pcb.getProcessColor(), pcb.getProcessId(), pcb.getArrivingTime(), process.getPriority(),
                     pcb.getEstimatedTime(),process.getProcessProperties()[3], printerCounter,
                     scannerCounter,modemCounter,cdDriveCounter,pcb.getState().name())
             );
@@ -86,7 +86,7 @@ public class CPU implements ICPU {
         if(process==null)
             return null;
         IPCB pcb=ram.search(process.getProcessId());
-        if(pcb.getState()==State.TERMINATED)
+        if(pcb==null||pcb.getState()==State.TERMINATED)
             return null;
         return process;
     }

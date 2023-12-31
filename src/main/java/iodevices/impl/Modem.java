@@ -6,7 +6,7 @@ import main.java.os.abstracts.IProcess;
 public class Modem implements IModem {
     private boolean availableDevice = true;
     private int _currentProcessId = -1;
-    private int modemId;
+    private final int modemId;
 
     public Modem(int modemId) {
         this.modemId = modemId;
@@ -28,10 +28,9 @@ public class Modem implements IModem {
         return false;
     }
     @Override
-    public boolean deAllocate() {
+    public void deAllocate() {
         availableDevice=true;
         _currentProcessId=-1;
-        return true;
     }
     @Override
     public int checkWhichProcessUsingTheDevice() {

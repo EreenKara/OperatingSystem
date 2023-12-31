@@ -13,7 +13,7 @@ public class OurTime implements IOurTime {
 
     public OurTime(long timeRate) {
         this.timeRate = timeRate;
-        this.elapsedTime = 0;
+        elapsedTime = 0;
         this.executorService = Executors.newSingleThreadScheduledExecutor();
         start();
     }

@@ -20,8 +20,8 @@ public class WaitingQueue implements IWaitingQueue {
     }
 
     @Override
-    public IProcess dequeue() {
-        return waitingQueue.remove();
+    public void dequeue(IProcess process) {
+        waitingQueue.remove(process);
     }
 
     @Override

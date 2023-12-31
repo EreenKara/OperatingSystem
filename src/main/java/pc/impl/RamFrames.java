@@ -2,22 +2,22 @@ package main.java.pc.impl;
 
 import main.java.pc.abstracts.IRAMFrames;
 
+import java.util.Arrays;
+
 public class RamFrames implements IRAMFrames{
 
-	private int frameSize;
-	private boolean[] perMByte;
+	private final int frameSize;
+	private final boolean[] perMByte;
 	public RamFrames(int frameSize) {
 		this.frameSize = frameSize;
-		this.perMByte=new boolean[frameSize];
+		this.perMByte=new boolean[this.frameSize];
 		
 	}
 
 	
 	@Override
 	public void truncateFrame() {
-		for (boolean b : perMByte) {
-			b=false;
-		}
+        Arrays.fill(perMByte, false);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class RamFrames implements IRAMFrames{
 	@Override
 	public boolean checkAllocated() {
 		for (boolean b : perMByte) {
-			if(b==true) return true;
+			if(b) return true;
 		}
 		return false;
 	}

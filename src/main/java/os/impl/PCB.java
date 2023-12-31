@@ -4,7 +4,6 @@ import main.java.iodevices.abstracts.IIODevice;
 import main.java.os.abstracts.IPCB;
 import main.java.utility.enums.State;
 
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +20,6 @@ public class PCB implements IPCB {
 
     public int getArrivingTime() {
         return arrivingTime;
-    }
-
-    public void setArrivingTime(int arrivingTime) {
-        this.arrivingTime = arrivingTime;
     }
 
 
@@ -46,24 +41,12 @@ public class PCB implements IPCB {
         return processId;
     }
 
-    public void setProcessId(int processId) {
-        this.processId = processId;
-    }
-
     public State getState() {
         return state;
     }
 
     public void setState(State state) {
         this.state = state;
-    }
-
-    public int getProgramCounter() {
-        return programCounter;
-    }
-
-    public void setProgramCounter(int programCounter) {
-        this.programCounter = programCounter;
     }
 
     public int getWorkingTime() {
@@ -84,10 +67,6 @@ public class PCB implements IPCB {
 
     public String getProcessColor() {
         return processColor;
-    }
-
-    public void setProcessColor(String processColor) {
-        this.processColor = processColor;
     }
 
     public List<IIODevice> getIoDevices() {

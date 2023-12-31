@@ -12,6 +12,7 @@ import main.java.utility.abstracts.IOurTime;
 import main.java.utility.enums.State;
 import main.java.utility.impl.Publisher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OS implements IOS {
@@ -33,7 +34,7 @@ public class OS implements IOS {
     private final List<IScanner> scanners;//1
     private final List<IModem> modems;//1
     private final List<ICDDrive> cdDrivers;//2
-    private IWaitingQueue waitingQueue;
+    private final IWaitingQueue waitingQueue;
 
     public OS(IDisplay display,
               IRAM ram,
@@ -85,13 +86,11 @@ public class OS implements IOS {
     public void requestForProcessCreate(String[] process) {
         IProcess createdProcess = this.processManager.createProcess(process);
         if (createdProcess != null) {
-            this.sendApproiateQueue(createdProcess);
-        } else {
-            display.print(process[0] + "\tHATA - Gerçek-zamanlı proses (64MB) tan daha fazla bellek talep ediyor - proses silindi.");
+            this.sendAppropriateQueue(createdProcess);
         }
     }
 
-    private void sendApproiateQueue(IProcess process) {
+    private void sendAppropriateQueue(IProcess process) {
         if (ram.search(process.getProcessId()).getState() == State.WAITING) {
             this.waitingQueue.enqueue(process);
         } else {
@@ -100,11 +99,14 @@ public class OS implements IOS {
     }
 
     private void checkWaitingQueueProcesses() {
+        List<IProcess> processes=new ArrayList<>();
         for (IProcess process : this.waitingQueue.getQueue()) {
             IProcess updatedProcess = this.processManager.allocateDevicesAndRam(process);
             if(ram.search(updatedProcess.getProcessId()).getState() == State.READY) {
                 this.schedulerGeneral.scheduleProcess(updatedProcess);
+                processes.add(updatedProcess);
             }
         }
+        processes.forEach(waitingQueue::dequeue);
     }
 }

@@ -17,13 +17,13 @@ import java.util.List;
 public class Computer implements IComputer {
     boolean isOn;
     private IOS operatingSystem;
-    private IRAM ram;
-    private List<IPrinter> printers;
-    private List<IScanner> scanners;
-    private List<IModem> modems;
-    private List<ICDDrive> cdDrivers;
-    private IDisplay display;
-    private ICPU cpu;
+    private final IRAM ram;
+    private final List<IPrinter> printers;
+    private final List<IScanner> scanners;
+    private final List<IModem> modems;
+    private final List<ICDDrive> cdDrivers;
+    private final IDisplay display;
+    private final ICPU cpu;
 
     public Computer(IRAM ram, List<IPrinter> printers, List<IScanner> scanners, List<IModem> modems, List<ICDDrive> cdDrivers, IDisplay display, ICPU cpu) {
         this.isOn=false;
@@ -57,7 +57,7 @@ public class Computer implements IComputer {
     }
 
     @Override
-    public boolean loadOperatingSystem() {
+    public void loadOperatingSystem() {
         IUserQueue userQueue=new UserQueue();
         IRealTimeQueue realTimeQueue=new RealTimeQueue();
         ISchedulerFCFS schedulerFCFS= new SchedulerFCFS(realTimeQueue);
@@ -79,7 +79,6 @@ public class Computer implements IComputer {
                 modems,
                 cdDrivers,
                 new WaitingQueue());
-        return true;
     }
 
 

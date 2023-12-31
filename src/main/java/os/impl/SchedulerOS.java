@@ -1,7 +1,6 @@
 package main.java.os.impl;
 
 import main.java.os.abstracts.*;
-import main.java.utility.enums.State;
 import main.java.utility.impl.Publisher;
 
 public class SchedulerOS implements ISchedulerOS {
@@ -24,7 +23,7 @@ public class SchedulerOS implements ISchedulerOS {
         if(dispatcher.isProcessInFCFS())
             return null;
         if ((process = schedulerFCFS.getProcess()) != null) {
-            prevExecutedProcess = dispatcher.ContextSwitch(process);
+            dispatcher.ContextSwitch(process);
         } else if ((process = schedulerRR.getProcess()) != null) {
             prevExecutedProcess = dispatcher.ContextSwitch(process);
             updatePriorityAndState(prevExecutedProcess);

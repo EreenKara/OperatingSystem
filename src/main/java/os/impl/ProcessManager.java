@@ -1,9 +1,6 @@
 package main.java.os.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import main.java.iodevices.abstracts.ICDDrive;
 import main.java.iodevices.abstracts.IIODevice;
@@ -14,20 +11,18 @@ import main.java.os.abstracts.IPCB;
 import main.java.os.abstracts.IProcess;
 import main.java.os.abstracts.IProcessManager;
 import main.java.pc.abstracts.IRAM;
-import main.java.pc.impl.Ram;
 import main.java.pc.impl.Status;
 import main.java.utility.abstracts.IObserver;
 import main.java.utility.enums.State;
-import main.java.utility.impl.OurTime;
 import main.java.utility.impl.Publisher;
 
 public class ProcessManager implements IProcessManager, IObserver {
 
     private final IRAM ram;
-    private List<IPrinter> printers;//2
-    private List<IScanner> scanners;//1
-    private List<IModem> modems;//1
-    private List<ICDDrive> cdDrives;//2
+    private final List<IPrinter> printers;//2
+    private final List<IScanner> scanners;//1
+    private final List<IModem> modems;//1
+    private final List<ICDDrive> cdDrivers;//2
     private int pid;
 
     public ProcessManager(IRAM ram,List<IPrinter> printers,List<IScanner> scanners,List<IModem> modems,List<ICDDrive> cdDrives) {
@@ -36,7 +31,7 @@ public class ProcessManager implements IProcessManager, IObserver {
         this.printers=printers;
         this.scanners=scanners;
         this.modems=modems;
-        this.cdDrives=cdDrives;
+        this.cdDrivers =cdDrives;
 		Publisher.attach(this);
     }
     private String generateColor() {
@@ -46,11 +41,31 @@ public class ProcessManager implements IProcessManager, IObserver {
     @Override //oluşturmak için
     public IProcess createProcess(String[] requirements) {
     	// , State state, int programCounter, int workingTime, String processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
-    	if(ram.checkStatus(Integer.parseInt(requirements[3]) )==Status.DELETED) return null;
-    	else if(printers.size() < Integer.parseInt(requirements[4])) return null;
-    	else if(scanners.size() < Integer.parseInt(requirements[5])) return null;
-    	else if(modems.size() < Integer.parseInt(requirements[6])) return null;
-    	else if(cdDrives.size() < Integer.parseInt(requirements[7])) return null;
+		String redColor = "\u001B[31m";
+		String resetColor = "\u001B[0m";
+		if(ram.checkStatus(Integer.parseInt(requirements[3]) )==Status.DELETED) {
+			System.out.printf(redColor+"NOT ENOUGH RAM! PROCESS RAM: %s",requirements[3]);
+			System.out.println(" -- PROCESS DELETED"+resetColor);
+			return null;
+		}
+    	else if(printers.size() < Integer.parseInt(requirements[4])) {
+			System.out.printf(redColor+"NOT ENOUGH PRINTERS! REQUIRED PRINTERS: %s",requirements[4]);
+			System.out.println(" -- PROCESS DELETED"+resetColor);
+			return null;}
+    	else if(scanners.size() < Integer.parseInt(requirements[5])){
+			System.out.printf(redColor+"NOT ENOUGH SCANNERS! REQUIRED SCANNERS: %s",requirements[5]);
+			System.out.println(" -- PROCESS DELETED"+resetColor);
+			return null;}
+    	else if(modems.size() < Integer.parseInt(requirements[6])) {
+			System.out.printf(redColor+"NOT ENOUGH MODEMS! REQUIRED MODEMS: %s",requirements[6]);
+			System.out.println(" -- PROCESS DELETED"+resetColor);
+			return null;
+		}
+    	else if(cdDrivers.size() < Integer.parseInt(requirements[7])) {
+			System.out.printf(redColor+"NOT ENOUGH CD DRIVERS! REQUIRED CD DRIVERS: %s",requirements[7]);
+			System.out.println(" -- PROCESS DELETED"+resetColor);
+			return null;
+		}
 
     	IProcess process= new Process(requirements,pid,Integer.parseInt(requirements[1]));
     	// processColor, List<IIODevice> ioDevices, Map<Integer, Integer> memoryOccupiedPageTable
@@ -65,7 +80,7 @@ public class ProcessManager implements IProcessManager, IObserver {
 
 
 		 // Allocated
-		List<IIODevice> liste=new ArrayList<IIODevice>();
+		List<IIODevice> liste=new ArrayList<>();
 		int count =0;
 		for (var data : printers) {
 			if(count != Integer.parseInt(requirements[4])) {
@@ -91,7 +106,7 @@ public class ProcessManager implements IProcessManager, IObserver {
 			}
 		}
 		count=0;
-		for (var data : cdDrives) {
+		for (var data : cdDrivers) {
 			if(count != Integer.parseInt(requirements[7])) {
 				data.allocate(process);
 				liste.add(data);
@@ -113,29 +128,24 @@ public class ProcessManager implements IProcessManager, IObserver {
     	int wantedScanner=Integer.parseInt(requirements[5]);
     	int wantedModem=Integer.parseInt(requirements[6]);
     	int wantedCDDriver=Integer.parseInt(requirements[7]);
-    	int count=0;
-    	for (var data : printers) {
-    		if(data.checkStatus()) count++;
-		}
-    	if(count < wantedPrinter) return false;
-    	count=0;
-    	for (var data : scanners) {
-    		if(data.checkStatus()) count++;
-		}
-    	if(count < wantedScanner) return false;
-    	count=0;
-    	for (var data : modems) {
-    		if(data.checkStatus()) count++;
-		}
-    	if(count < wantedModem) return false;
-    	count=0;
-    	for (var data : cdDrives) {
-    		if(data.checkStatus()) count++;
-		}
-    	if(count < wantedCDDriver) return false;
-
-    	return true;
+		if(!checkAvailabilityOfDevices(wantedPrinter,printers))
+			return false;
+    	if(!checkAvailabilityOfDevices(wantedScanner,scanners))
+			return false;
+    	if(!checkAvailabilityOfDevices(wantedModem,modems))
+			return false;
+    	if(!checkAvailabilityOfDevices(wantedCDDriver, cdDrivers))
+			return false;
+		return true;
     }
+	private boolean checkAvailabilityOfDevices(int wantedDeviceAmount,List<? extends IIODevice> deviceList){
+	 	int count=0;
+		for (var data : deviceList) {
+			if(data.checkStatus()) count++;
+		}
+		return count>=wantedDeviceAmount;
+	}
+
     @Override
     public IProcess allocateDevicesAndRam(IProcess process) {
 		if(checkDevices(process.getProcessProperties())&& ram.checkStatus(Integer.parseInt(process.getProcessProperties()[3]))==Status.ALLOCATED)
@@ -145,7 +155,7 @@ public class ProcessManager implements IProcessManager, IObserver {
 			pcb.setState(State.READY);
 			pcb.setMemoryOccupiedPageTable(ram.allocate(Integer.parseInt(process.getProcessProperties()[3])));
 			// Allocated
-			List<IIODevice> liste=new ArrayList<IIODevice>();
+			List<IIODevice> liste=new ArrayList<>();
 			int count =0;
 			for (var data : printers) {
 				if(count != Integer.parseInt(process.getProcessProperties()[4])) {
@@ -171,7 +181,7 @@ public class ProcessManager implements IProcessManager, IObserver {
 				}
 			}
 			count=0;
-			for (var data : cdDrives) {
+			for (var data : cdDrivers) {
 				if(count != Integer.parseInt(process.getProcessProperties()[7])) {
 					data.allocate(process);
 					liste.add(data);
@@ -184,19 +194,20 @@ public class ProcessManager implements IProcessManager, IObserver {
 
         return process;
     }
-    private int getUniqueProcessId()
-    {
-        return pid++;
-    }
 
 	@Override
 	public void update() {
-		for (Map.Entry<Integer, IPCB> entry : ram.getPCBList().entrySet()) {
-			IPCB pcb=entry.getValue();
-			if(pcb.getState()==State.TERMINATED)
-			{
+		Iterator<Map.Entry<Integer, IPCB>> iterator = ram.getPCBList().entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<Integer, IPCB> entry = iterator.next();
+			IPCB pcb = entry.getValue();
+
+			if (pcb.getState() == State.TERMINATED) {
 				pcb.getIoDevices().forEach(IIODevice::deAllocate);
 				ram.deAllocate(pcb.getMemoryOccupiedPageTable());
+
+				// Remove the entry from the map using the iterator
+				iterator.remove();
 			}
 		}
 	}
@@ -205,55 +216,6 @@ public class ProcessManager implements IProcessManager, IObserver {
 	public int getSequenceNumber() {
 		return 0;
 	}
-
-
-//    //sonlandırmak için
-//    public boolean terminateProcess(int processID) {
-//        IPCB terminatedProcess = null;
-//
-//        for (IPCB process : processes) {
-//            if (process.getProcessId() == processID) {
-//                terminatedProcess = process;
-//                break;
-//            }
-//        }
-//
-//        if (terminatedProcess != null) {
-//            // İşlemi sonlandır
-//            processes.remove(terminatedProcess);
-//            System.out.println("Process terminated successfully - Process ID: " + processID);
-//            return true;
-//        } else {
-//            System.out.println("Process not found - Process ID: " + processID);
-//            return false;
-//        }
-//    }
-    
-//    public void displayProcesses() {
-//        System.out.println("Current Processes:");
-//        for (IPCB process : processes) {
-//            System.out.println("Process ID: " + process.getProcessId() +
-//                    ", Memory Size: " + process.getMemorySize()); 
-//        }
-//    }
-    
-//    public boolean addProcess(int processID, int memorySize) {
-//    	// ??
-//
-//        // İşlemi MemoryManager'a ekleyerek bellek tahsis et
-//        boolean allocationResult = PCB.addPCB(newProcess);
-//
-//        if (allocationResult) {
-//            processes.add(newProcess);
-//            System.out.println("Process added successfully - Process ID: " + processID +
-//                    ", Memory Size: " + memorySize);
-//            return true;
-//        } else {
-//            System.out.println("Failed to add process - Process ID: " + processID +
-//                    ", Memory Size: " + memorySize);
-//            return false;
-//        }
-//    }
 
 
 

@@ -3,44 +3,31 @@ package main.java.os.abstracts;
 import main.java.iodevices.abstracts.IIODevice;
 import main.java.utility.enums.State;
 
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
 public interface IPCB {
-    public int getProcessId();
+    int getProcessId();
+    State getState();
 
-    public void setProcessId(int processId);
+    void setState(State state);
 
-    public State getState();
+    int getWorkingTime();
 
-    public void setState(State state);
-
-    public int getProgramCounter();
-
-    public void setProgramCounter(int programCounter);
-
-    public int getWorkingTime();
-
-    public void setWorkingTime(int workingTime);
+    void setWorkingTime(int workingTime);
 
     int getEstimatedTime();
 
-    void setEstimatedTime(int estimatedTime);
-    public String getProcessColor();
+    String getProcessColor();
 
-    public void setProcessColor(String processColor);
+    List<IIODevice> getIoDevices();
 
-    public List<IIODevice> getIoDevices();
+    void setIoDevices(List<IIODevice> ioDevices);
 
-    public void setIoDevices(List<IIODevice> ioDevices);
+    Map<Integer, Integer> getMemoryOccupiedPageTable();
 
-    public Map<Integer, Integer> getMemoryOccupiedPageTable();
+    void setMemoryOccupiedPageTable(Map<Integer, Integer> memoryOccupiedPageTable) ;
 
-    public void setMemoryOccupiedPageTable(Map<Integer, Integer> memoryOccupiedPageTable) ;
-
-    public int getArrivingTime();
-
-    public void setArrivingTime(int arrivingTime) ;
+    int getArrivingTime();
 
 }

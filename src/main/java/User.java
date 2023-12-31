@@ -1,7 +1,6 @@
 package main.java;
 
 import main.java.pc.abstracts.IComputer;
-import main.java.pc.impl.Computer;
 import main.java.utility.abstracts.IReadText;
 import main.java.utility.impl.OurTime;
 import main.java.utility.impl.Publisher;

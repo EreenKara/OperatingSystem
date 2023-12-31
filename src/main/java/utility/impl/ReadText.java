@@ -19,16 +19,10 @@ public class ReadText implements IReadText {
             {
                 String[] numbers=line.split(", ");
                 data.add(numbers);
-                //TODO Delete
-//                for(String number:numbers)
-//                {
-//                    System.out.print(number+" ");
-//                }
-//                System.out.println();
             }
         }catch(IOException e)
         {
-            e.printStackTrace();
+            System.out.println("Error while reading file! Message: "+e.getMessage());
         }
     }
 

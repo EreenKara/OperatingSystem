@@ -1,6 +1,5 @@
 package main.java.pc.impl;
 
-import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -9,10 +8,10 @@ import main.java.pc.abstracts.IRAM;
 import main.java.pc.abstracts.IRAMFrames;
 
 public class Ram implements IRAM {
-	   private int totalRam;
+	   private final int totalRam;
 	   public int ramFrameSize;
-	   private IRAMFrames[] ramFrames;
-       private Map<Integer, IPCB> allocated ;
+	   private final IRAMFrames[] ramFrames;
+       private final Map<Integer, IPCB> allocated ;
        
 	public Ram(int totalRam) {
 		this.ramFrameSize=8;
@@ -26,18 +25,16 @@ public class Ram implements IRAM {
 		allocated= new Hashtable<>();
 	}
 	
-	   private IPCB getPCBByID(int processID) {
-	        return allocated.get(processID);
-	    }
-	   public Status checkStatus(int memorysize) {
-			if(memorysize> totalRam ||memorysize<0) {
+
+	   public Status checkStatus(int memorySize) {
+			if(memorySize> totalRam ||memorySize<0) {
 				return Status.DELETED;		   
 			}
-			int frameMiktari=(int)(Math.ceil(memorysize/8));
+			int frameMiktari=(int)(Math.ceil((double)memorySize/8));
 			int count =0;
 			for(int i = 0; i< totalRam /ramFrameSize; i++) {
 				if(!(ramFrames[i].checkAllocated())) count++;
-				if(count==frameMiktari) return Status.ALLOCATED;;
+				if(count==frameMiktari) return Status.ALLOCATED;
 			}
 			return Status.WAITED;
 	   }
@@ -47,9 +44,9 @@ public class Ram implements IRAM {
 		return allocated;
 	}
 
-	public Map<Integer, Integer> allocate(int memorysize){
-		   int frameMiktari=(int)(Math.ceil(memorysize/8));
-		   Map<Integer,Integer> pageTable= new Hashtable<Integer, Integer>();
+	public Map<Integer, Integer> allocate(int memorySize){
+		   int frameMiktari=(int)Math.ceil((double)memorySize/8);
+		   Map<Integer,Integer> pageTable= new Hashtable<>();
 		   int count =0;
 		   for(int i = 0; i< totalRam /ramFrameSize; i++) {
 				if(!(ramFrames[i].checkAllocated())) {
@@ -63,89 +60,22 @@ public class Ram implements IRAM {
 		   return pageTable;
 		   
 	   }
-	   public void deAllocate(Map<Integer,Integer> liste){
-		   for (Map.Entry<Integer, Integer> entry : liste.entrySet()) {
+	   public void deAllocate(Map<Integer,Integer> map){
+		   for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
 			   ramFrames[entry.getValue()].truncateFrame();
 		   }
 	   }
-
-//	public boolean CheckPCB() {
-//		IPCB pcb;
-//        if (pcb == null) {
-//            System.out.println("Invalid PCB.");
-//            return false;
-//        }
-//
-//        if (allocated.containsKey(pcb.getProcessId())) {
-//            System.out.println("Process ID " + pcb.getProcessId() + " is already allocated.");
-//            return false;
-//        }
-//
-//        if (pcb.getMemorySize() <= 0 || pcb.getMemorySize() > TotalRam) {
-//            System.out.println("Invalid memory size for Process ID " + pcb.getProcessId() + ".");
-//            return false;
-//        }
-//
-//        // İlgili işlemin bellek alanlarını işaretleyerek tahsis et
-//        int startIndex = findAvailableMemory(pcb.getMemorySize());
-//        if (startIndex == -1) {
-//            System.out.println("Insufficient memory for Process ID " + pcb.getProcessId() + ".");
-//            return false;
-//        }
-//
-//        for (int i = 0; i < pcb.getMemorySize(); i++) {
-//            RamFrames[startIndex + i] = true;
-//        }
-//
-//        // IPCB'yi bellek bloğuyla ilişkilendir
-//        allocated.put(pcb.getProcessId(), pcb);
-//
-//        System.out.println("Process ID " + pcb.getProcessId() + " allocated successfully.");
-//        return true;
-//    }
-//	
-//	  private int findAvailableMemory(int requiredMemory) {
-//	        int consecutiveFreeFrames = 0;
-//	        for (int i = 0; i < TotalRam; i++) {
-//	            if (!RamFrames[i]) {
-//	                consecutiveFreeFrames++;
-//	                if (consecutiveFreeFrames == requiredMemory) {
-//	                    return i - requiredMemory + 1;
-//	                }
-//	            } else {
-//	                consecutiveFreeFrames = 0;
-//	            }
-//	        }
-//	        return -1; // Yeterli bellek alanı bulunamadı
-//	    }
-	
-	   
-	   
 
 	@Override
 	public IPCB search(int processID) {
 		return allocated.get(processID);
 	}
     // sonradan
- 	public int getTotalRam() {
-	return totalRam;
-	}
-	public void setTotalRam(int TotalRam) 
-	{
-		this.totalRam =TotalRam;
-	}
-	
-	public IRAMFrames[] getRamFrames() {
-	return ramFrames;
-	}
-	public void setRamFrames(IRAMFrames[] RamFrames)
-	{
-		this.ramFrames =RamFrames;
-	}
+
+
 	@Override
-	public boolean addPCB(IPCB pcb) {
+	public void addPCB(IPCB pcb) {
 		allocated.put(pcb.getProcessId(),pcb);
-		return true;
 	}
 	
 }

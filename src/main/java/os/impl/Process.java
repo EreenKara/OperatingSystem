@@ -21,16 +21,8 @@ public class Process implements IProcess {
         return processProperties;
     }
 
-    public void setProcessProperties(String[] processProperties) {
-        this.processProperties = processProperties;
-    }
-
     public int getProcessId() {
         return processId;
-    }
-
-    public void setProcessId(int processId) {
-        this.processId = processId;
     }
 
     public int getPriority() {
