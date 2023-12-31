@@ -8,4 +8,6 @@ public interface IWaitingQueue {
     void dequeue(IProcess process);
 
     Queue<IProcess> getQueue();
+
+    boolean isEmpty();
 }

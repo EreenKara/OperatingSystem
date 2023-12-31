@@ -28,4 +28,9 @@ public class WaitingQueue implements IWaitingQueue {
     public Queue<IProcess> getQueue() {
         return waitingQueue;
     }
+
+    @Override
+    public boolean isEmpty() {
+        return waitingQueue.isEmpty();
+    }
 }

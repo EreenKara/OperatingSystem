@@ -24,7 +24,7 @@ public class OurTime implements IOurTime {
             Publisher.ourNotify();
             elapsedTime += 1;
 
-            }, timeRate, timeRate, TimeUnit.SECONDS);
+            }, timeRate, timeRate, TimeUnit.MILLISECONDS);
     }
 
     @Override

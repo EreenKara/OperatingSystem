@@ -90,6 +90,16 @@ public class OS implements IOS {
         }
     }
 
+    @Override
+    public boolean shouldTurnOff() {
+        return userQueue.isEmpty()&&realTimeQueue.isEmpty()&&waitingQueue.isEmpty();
+    }
+
+    @Override
+    public void shutDown() {
+        ourTime.stop();
+    }
+
     private void sendAppropriateQueue(IProcess process) {
         if (ram.search(process.getProcessId()).getState() == State.WAITING) {
             this.waitingQueue.enqueue(process);

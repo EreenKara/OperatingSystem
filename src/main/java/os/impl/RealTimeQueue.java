@@ -24,4 +24,9 @@ public class RealTimeQueue implements IRealTimeQueue {
             return null;
         return priority0.remove();
     }
+
+    @Override
+    public boolean isEmpty() {
+        return priority0.isEmpty();
+    }
 }

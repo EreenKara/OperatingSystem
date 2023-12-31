@@ -55,4 +55,9 @@ public class UserQueue implements IUserQueue {
         }
         return process;
     }
+
+    @Override
+    public boolean isEmpty() {
+        return priority1.isEmpty()&&priority2.isEmpty()&&priority3.isEmpty();
+    }
 }

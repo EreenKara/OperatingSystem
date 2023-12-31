@@ -11,6 +11,7 @@ import main.java.pc.abstracts.IComputer;
 import main.java.pc.abstracts.IDisplay;
 import main.java.pc.abstracts.IRAM;
 import main.java.utility.impl.OurTime;
+import main.java.utility.impl.Publisher;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class Computer implements IComputer {
         this.cdDrivers = cdDrivers;
         this.display = display;
         this.cpu = cpu;
+        Publisher.attach(this);
     }
 
     @Override
@@ -49,11 +51,6 @@ public class Computer implements IComputer {
     @Override
     public IOS getOS() {
         return this.operatingSystem;
-    }
-
-    public boolean getIsOn()
-    {
-        return isOn;
     }
 
     @Override
@@ -73,7 +70,7 @@ public class Computer implements IComputer {
                 dispatcher,
                 new ProcessManager(ram,printers,scanners,modems,cdDrivers),
                 new SchedulerOS(schedulerRR,schedulerFCFS,dispatcher),
-                new OurTime(1),
+                new OurTime(250),
                 printers,
                 scanners,
                 modems,
@@ -81,5 +78,17 @@ public class Computer implements IComputer {
                 new WaitingQueue());
     }
 
+    @Override
+    public void update() {
+        if(operatingSystem.shouldTurnOff()&&cpu.getCounter()==5 )
+        {
+            operatingSystem.shutDown();
+            turnOff();
+        }
+    }
 
+    @Override
+    public int getSequenceNumber() {
+        return 5;
+    }
 }
