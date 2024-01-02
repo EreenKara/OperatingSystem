@@ -14,9 +14,9 @@ public class User implements IUser {
 
     private final IComputer computer;
 
-    public User(IComputer computer) {
+    public User(IComputer computer,String path) {
         this.readText = new ReadText();
-        readText.read("C:\\Users\\ilyas\\School\\Isletim Sistemleri\\Odev\\giris.txt");
+        readText.read(path);
         this.computer = computer;
         Publisher.attach(this);
     }
