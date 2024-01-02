@@ -97,6 +97,7 @@ public class OS implements IOS {
 
     @Override
     public void shutDown() {
+        display.print("ALL QUEUES ARE EMPTY AND CPU IS EXECUTING WITHOUT PROCESS SINCE 5 SECONDS. SHUTTED DOWN PC");
         ourTime.stop();
     }
 
