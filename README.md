@@ -1,5 +1,11 @@
-# Project of Eren(EreenKara), Samed(BuYKMan), Ilyas(AydinIlyas), Emirhan(emrhntl), Mervan(mervanAksu).
+# Project of 
+- Eren(EreenKara)
+- Samed(BuYKMan)
+- Ilyas(AydinIlyas)
+- Emirhan(emrhntl)
+- Mervan(mervanAksu)
 
+  
 # Design of Operating System
 [Design](<docs/OperatingSystems.drawio>)
 
@@ -114,4 +120,5 @@ Bütün process’lerin çalışma işlemi bittiğinde, bekleyen process kalmad�
 Böylece kurguladığımız küçük evren içerisindeki kullanıcımızın bilgisayarı kapanmış, işlemleri işletim sistemimiz tarafından gerçekleşmiş oluyor ve sanal kullanıcımız hayatını, biz ise hayatımızın bu kısmını noktalamış oluyoruz.
 
 5. Uygulamaya Ait Gorseller
-![calismaGoruntusu](<docs/calismaGoruntusu.png>)
+   
+    ![calismaGoruntusu](<docs/calismaGoruntusu.png>)
