@@ -3,7 +3,8 @@
 # Design of Operating System
 [Design](<docs/OperatingSystems.drawio>)
 
-![resimdrawio](<>)
+![resimdrawio](<docs/Design.png>)
+
 
 # Given Project 
 [Assignment](<docs/İşletim Sistemleri - Proje_Versiyon_2..docx>)
@@ -54,7 +55,7 @@ BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ
    
     Tasarım modeline ulaşmak için : https://github.com/EreenKara/OperatingSystem/blob/master/docs/OperatingSystems.drawio
 
-4. Proje Tasarımının Tartışılması
+3. Proje Tasarımının Tartışılması
     - a.	Neden Böyle Bir Tasarım Tercih Ettik ?
       
         Tasarımımızı internet araştırmalarımızda elde ettiğimiz gerçek işletim sistemi çalışma mekanizmalarına göre gerçekledik. Proje içerisindeki her bir field, her bir algoritma gerçekte hangi modül (cihaz) tarafından gerçekleniyorsa bizim işletim sistemimizde de aynı modül tarafından gerçekleniyor. Gerçekçiliğin artması ve algoritmanın akışının daha anlaşılabilir olması açısından birçok sınıf ilave ettik. Örneğin process’lerin anlamsız bir sınıf tarafından sıralama algoritmalarına gönderilmesinden daha ziyade gerçek bir kullanıcı tarafından veriliyormuşcasına User sınıfı tarafından Operating System’in kontrolünü gerçekledik. Buna benzer gerçekçiliği arttırıcı birçok detay bulunmakta.
@@ -95,7 +96,7 @@ BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ
 
  	    Bu scheduler algoritmalarını seçmemizin sebebi bizlere proje dokümanı içerisinde gerçeklememiz gereken algoritmaların bu olduğunun zaten söylenmiş olması. Bu algoritmalar process’lerin cpu’yu elde etme sürelerini ayarlama konusunda iyi iş çıkarıyorlar ancak gerçek zamanlı process olayı user process’lerini hiçe sayarak çalışıyor. Bu durumda user process’ler oldukça uzun zaman bekliyorlar bu kısım optimize edilebilir. Örneğin gerçek zamanlı process bir user process için 5 saniyede bir cpu’yu bırakıp yer verebilir. Bunun gibi geliştirmeler yapılabilir. Ancak bence gayet güzel iş çıkarıyor bu algoritmalar.
 
-5.	Proje Akış Mantığı
+4.	Proje Akış Mantığı
    
      Publisher modülüne herbir observer kendi kendini constructor’ı içerisinde publisher’ın static attach() methodu ile ekler. Herbir observer’a ait çalışma sırasını gösteren sequence number vardır. Bu numaraya göre publisher içerisindeki listede sıralı tutulurlar. Publisher observer listesini – ki bu liste sıralı – notify eder. Bu notify işlemi herbir zaman tick’i içerisinde gerçeklenir. Zaman asenkron bir şekilde çalışmasına operating system bilgisayara yüklendiğinde başlar (instance’ı oluştuğunda). Herbir notify işlemi içerisinde sırasıyla process manager, user, scheduler, cpu, OS kendi update methodlarını çağırırlar. 
 Daha anlaşılabilir bir anlatım olması açısından process manager ilk tetiklenmesine ragmen son olarak onu açıklayacağım.
@@ -111,5 +112,6 @@ Daha anlaşılabilir bir anlatım olması açısından process manager ilk tetik
     ProcessManager’ın update methodunu sona sakladım çünkü yaptığı iş sonlanan process’lerin kapladıkları ram bölgelerini ve kullandıkları device’ları serbest bırakmak. Bu işlemi process’lerin lifecycle’ından sorumlu olan bir modül olduğu için ProcessManager içerisinde gerçekliyoruz.
 Bütün process’lerin çalışma işlemi bittiğinde, bekleyen process kalmadığında ve yeni hiçbir process gelmediğinde bilgisayarın kapanmasını gerektiğini düşündük. Bunu ise OS içerisinde queue’ları kontrol ederek gerçekliyoruz. Queue’lar boşsa ve CPU 5 kere boşa çalışmıssa bilgisayar kapanmalı. Bu durumda OS, bilgisayarı kapatma sinyali gönderiyor.
 Böylece kurguladığımız küçük evren içerisindeki kullanıcımızın bilgisayarı kapanmış, işlemleri işletim sistemimiz tarafından gerçekleşmiş oluyor ve sanal kullanıcımız hayatını, biz ise hayatımızın bu kısmını noktalamış oluyoruz.
-<br>
 
+5. Uygulamaya Ait Gorseller
+![calismaGoruntusu](<docs/calismaGoruntusu.png>)
